@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Developer & Designer</title>
+  <meta name="description" content="Minimalist, monochromatic personal portfolio template featuring high performance and interactive UI.">
+  <meta name="author" content="Nur Aditya Saputra">
+
+  <!-- Favicon (Clean SVG monochrome monogram) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2309090b'/><path d='M10 22L16 10L22 22M12 18H20' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Ambient background elements -->
+  <div class="bg-grid"></div>
+  <div class="mouse-spotlight"></div>
+
+  <!-- =================================================================
+       SITE NAVIGATION
+       ================================================================= -->
+  <header class="site-header">
+    <nav class="nav-shell">
+      <a href="#about" class="brand">
+        <span class="brand-dot" title="Available for work"></span>
+        <span>dev.folio</span>
+      </a>
+
+      <!-- Desktop Links -->
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link active">About</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#terminal" class="nav-link">Terminal</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Action items -->
+      <div class="nav-actions">
+        <!-- Command Palette Trigger Button -->
+        <button class="cmd-trigger cmd-trigger-btn" title="Quick Navigation (Ctrl+K)">
+          <span>Search</span>
+          <span class="kbd">Ctrl K</span>
+        </button>
+
+        <!-- Theme Toggle (Dark/Light) -->
+        <button class="icon-btn theme-toggle-btn" title="Switch Theme" aria-label="Toggle theme">
+          <i data-lucide="sun" class="theme-icon" style="width:16px;height:16px;"></i>
+        </button>
+
+        <!-- Mobile Menu Hamburger -->
+        <button class="icon-btn mobile-menu-btn" id="mobile-toggle" aria-label="Open navigation menu">
+          <i data-lucide="menu" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- =================================================================
+       MAIN CONTENT CONTAINER
+       ================================================================= -->
+  <main class="container">
+
+    <!-- ========================= HERO SECTION ========================= -->
+    <section class="hero" id="about">
+      <div class="hero-header">
+        <div class="status-pill">
+          <span class="dot"></span>
+          <span id="hero-greeting-text">Hello</span> — <span id="hero-live-time">Loading local time...</span>
+        </div>
+
+        <h1 class="hero-title">
+          Building thoughtful software with clean code & 
+          <span class="text-muted">zero visual clutter.</span>
+        </h1>
+
+        <p class="hero-bio">
+          I'm <strong>Nur Aditya Saputra</strong>, a D4 Informatics Management student at Universitas Negeri Surabaya (UNESA). I build interactive web applications with React.js and API integration, backed by strong logical thinking and problem-solving skills from OSN Informatics.
+        </p>
+
+        <div class="hero-meta">
+          <div class="meta-item">
+            <i data-lucide="map-pin" style="width:14px;height:14px;"></i>
+            <span>Surabaya, Jawa Timur</span>
+          </div>
+          <div class="meta-item">
+            <i data-lucide="briefcase" style="width:14px;height:14px;"></i>
+            <span>Open for full-time & freelance</span>
+          </div>
+          <div class="meta-item">
+            <i data-lucide="code-2" style="width:14px;height:14px;"></i>
+            <span>React.js, JavaScript, HTML, CSS, RESTful API</span>
+          </div>
+        </div>
+
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">
+            <span>Explore Projects</span>
+            <i data-lucide="arrow-down-right" style="width:16px;height:16px;"></i>
+          </a>
+          <button class="btn btn-secondary" onclick="copyEmailToClipboard()">
+            <i data-lucide="copy" style="width:16px;height:16px;"></i>
+            <span>Copy Email</span>
+          </button>
+          <a href="#contact" class="btn btn-secondary">
+            <span>Contact Me</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= PROJECTS SECTION ========================= -->
+    <section class="section" id="projects">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">01. Selected Works</div>
+          <h2 class="section-title">Featured Projects</h2>
+          <p class="section-desc">Selected applications, open source libraries, and design explorations crafted with precision.</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="webapp">Web App</button>
+          <button class="filter-btn" data-filter="tools">Dev Tools</button>
+          <button class="filter-btn" data-filter="uiux">UI/UX</button>
+          <button class="filter-btn" data-filter="mobile">Mobile</button>
+        </div>
+      </div>
+
+      <!-- Projects Grid populated by JavaScript -->
+      <div class="projects-grid" id="projects-grid">
+        <!-- Rendered via js/main.js with fallback structure -->
+      </div>
+    </section>
+
+    <!-- ========================= EXPERIENCE SECTION ========================= -->
+    <section class="section" id="experience">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">02. Career & Background</div>
+          <h2 class="section-title">Experience & Education</h2>
+          <p class="section-desc">My professional journey, roles held, and technical qualifications.</p>
+        </div>
+
+        <div class="timeline-tabs">
+          <button class="timeline-tab-btn active" data-tab="experience">Work Experience</button>
+          <button class="timeline-tab-btn" data-tab="education">Education</button>
+          <button class="timeline-tab-btn" data-tab="certification">Certification</button>
+        </div>
+      </div>
+
+      <!-- Timeline Container -->
+      <div class="timeline-list" id="timeline-items-container">
+        <!-- Rendered via js/main.js -->
+      </div>
+    </section>
+
+    <!-- ========================= SKILLS SECTION ========================= -->
+    <section class="section" id="skills">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">03. Capabilities</div>
+          <h2 class="section-title">Skills & Arsenal</h2>
+          <p class="section-desc">Technologies and tools I work with daily to bring products to life.</p>
+        </div>
+      </div>
+
+      <div class="skills-grid">
+        <!-- Frontend Engineering -->
+        <div class="skill-category-card">
+          <h3 class="skill-cat-title">
+            <i data-lucide="layout" style="width:16px;height:16px;"></i>
+            Frontend Engineering
+          </h3>
+          <div class="skill-items">
+            <span class="skill-pill">React.js</span>
+            <span class="skill-pill">JavaScript</span>
+            <span class="skill-pill">HTML</span>
+            <span class="skill-pill">CSS</span>
+            <span class="skill-pill">Responsive Web Design</span>
+          </div>
+        </div>
+
+        <!-- API & Data -->
+        <div class="skill-category-card">
+          <h3 class="skill-cat-title">
+            <i data-lucide="server" style="width:16px;height:16px;"></i>
+            API & Data
+          </h3>
+          <div class="skill-items">
+            <span class="skill-pill">RESTful API Integration</span>
+          </div>
+        </div>
+
+        <!-- Workflow & Tools -->
+        <div class="skill-category-card">
+          <h3 class="skill-cat-title">
+            <i data-lucide="pen-tool" style="width:16px;height:16px;"></i>
+            Workflow & Tools
+          </h3>
+          <div class="skill-items">
+            <span class="skill-pill">Git</span>
+            <span class="skill-pill">GitHub</span>
+            <span class="skill-pill">VS Code</span>
+            <span class="skill-pill">AI-Assisted Development (Prompt Engineering)</span>
+          </div>
+        </div>
+
+        <!-- Design & Languages -->
+        <div class="skill-category-card">
+          <h3 class="skill-cat-title">
+            <i data-lucide="pen-tool" style="width:16px;height:16px;"></i>
+            Design & Languages
+          </h3>
+          <div class="skill-items">
+            <span class="skill-pill">Canva</span>
+            <span class="skill-pill">CapCut</span>
+            <span class="skill-pill">Microsoft Office</span>
+            <span class="skill-pill">Indonesian (Native)</span>
+            <span class="skill-pill">English (Intermediate)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= TERMINAL PLAYGROUND SECTION ========================= -->
+    <section class="section" id="terminal">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">04. Interactive Playground</div>
+          <h2 class="section-title">Developer Terminal</h2>
+          <p class="section-desc">Type commands like <code style="font-family:var(--font-mono); font-size:0.85em; background:var(--badge-bg); padding:2px 6px; border-radius:4px;">help</code>, <code style="font-family:var(--font-mono); font-size:0.85em; background:var(--badge-bg); padding:2px 6px; border-radius:4px;">skills</code>, or <code style="font-family:var(--font-mono); font-size:0.85em; background:var(--badge-bg); padding:2px 6px; border-radius:4px;">contact</code> to interact.</p>
+        </div>
+      </div>
+
+      <div class="terminal-wrapper">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <div class="terminal-dot" style="background:#ff5f56;"></div>
+            <div class="terminal-dot" style="background:#ffbd2e;"></div>
+            <div class="terminal-dot" style="background:#27c93f;"></div>
+          </div>
+          <div class="terminal-title">guest@portfolio:~ (bash)</div>
+          <div style="width:40px;"></div>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-output" id="term-output">
+            <div class="terminal-line">Welcome to the interactive portfolio terminal v2.0.</div>
+            <div class="terminal-line">Type <span style="color:var(--text-primary); font-weight:bold;">help</span> to inspect available commands, or explore the sections above.</div>
+          </div>
+          <div class="terminal-prompt">
+            <span class="cwd">guest@portfolio:~$</span>
+            <span class="arrow">&gt;</span>
+            <input type="text" id="term-input" class="terminal-input" placeholder="type a command..." autocomplete="off" spellcheck="false">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= CONTACT SECTION ========================= -->
+    <section class="section" id="contact">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">05. Communication</div>
+          <h2 class="section-title">Get In Touch</h2>
+          <p class="section-desc">Have an opportunity, project idea, or just want to discuss engineering? Feel free to write.</p>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Contact Information -->
+        <div class="contact-info">
+          <div class="contact-card-sub">
+            <div style="font-size:0.95rem; font-weight:700;">Direct Contact</div>
+            <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5;">
+              I typically reply within 24 hours. The fastest way to reach me is directly via email or LinkedIn.
+            </p>
+
+            <div class="copy-email-box">
+              <span id="display-email">nuradityasptra10@gmail.com</span>
+              <button class="btn btn-sm btn-secondary" id="copy-email-btn" title="Copy to clipboard">
+                <i data-lucide="copy" style="width:14px;height:14px;"></i>
+                <span>Copy</span>
+              </button>
+            </div>
+
+            <div style="margin-top:0.5rem;">
+              <div style="font-size:0.8rem; font-weight:600; color:var(--text-muted); margin-bottom:0.75rem; text-transform:uppercase; letter-spacing:0.05em;">Social Channels</div>
+              <div class="social-links">
+                <a href="https://github.com/NurAditya-dev" target="_blank" rel="noopener" class="social-pill">
+                  <svg viewBox="0 0 124 26" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12.02c0 4.42 2.87 8.17 6.84 9.5.5.08.68-.22.68-.48v-2.16c-3.34.73-4.04-1.53-4.04-1.53-.54-1.39-1.34-1.76-1.34-1.76-.9-.62.07-.61.07-.61 1.04.07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.92.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.09-2.65 0 0 .84-.27 2.75 1.02a9.57 9.57 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.54 1.38.19 2.4.09 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.57.69.48A10 10 0 0 0 22 12.02C22 6.48 17.52 2 12 2z" fill="#181717"/>
+                    <text x="96" y="19" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#181717" font-weight="bold" text-anchor="middle">GitHub</text>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <form class="contact-form" id="portfolio-contact-form">
+          <div class="form-group">
+            <label class="form-label" for="contact-name">Your Name</label>
+            <input type="text" id="contact-name" class="form-input" placeholder="e.g. Alex Pratama" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-email">Email Address</label>
+            <input type="email" id="contact-email" class="form-input" placeholder="alex@company.com" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-message">Message</label>
+            <textarea id="contact-message" class="form-textarea" placeholder="Tell me about your project, timeline, or inquiry..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%; margin-top:0.5rem;">
+            <span>Send Message</span>
+            <i data-lucide="send" style="width:16px;height:16px;"></i>
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================================================================
+       FOOTER
+       ================================================================= -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <span>Designed with minimalism & precision. &copy; <span id="footer-year">2026</span> Nur Aditya Saputra.</span>
+      </div>
+
+      <button class="footer-back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <i data-lucide="arrow-up" style="width:14px;height:14px;"></i>
+        <span>Back to Top</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- =================================================================
+       COMMAND PALETTE DIALOG (CTRL + K)
+       ================================================================= -->
+  <div class="modal-overlay" id="cmd-modal">
+    <div class="cmd-dialog" role="dialog" aria-modal="true" aria-labelledby="cmd-search-input">
+      <div class="cmd-input-box">
+        <i data-lucide="search" style="width:18px;height:18px;color:var(--text-muted);"></i>
+        <input type="text" id="cmd-input" placeholder="Type a command or search section..." autocomplete="off">
+        <span class="kbd">ESC</span>
+      </div>
+      <ul class="cmd-list" id="cmd-list">
+        <!-- Rendered via js/main.js -->
+      </ul>
+      <div class="cmd-footer">
+        <span>Navigation: <kbd class="kbd">↑</kbd> <kbd class="kbd">↓</kbd> to select</span>
+        <span>Press <kbd class="kbd">ENTER</kbd> to run</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================
+       PROJECT DETAIL MODAL
+       ================================================================= -->
+  <div class="modal-overlay" id="project-modal">
+    <div class="project-modal-dialog" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-project-title">Project Details</h3>
+        <button class="icon-btn" id="project-modal-close" aria-label="Close modal">
+          <i data-lucide="x" style="width:16px;height:16px;"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-banner" id="modal-project-preview">
+          <div style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-muted); display:flex; align-items:center; gap:0.5rem;">
+            <i data-lucide="image" style="width:18px;height:18px;"></i>
+            <span>Project Preview / Architecture Visual</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="font-size:0.9rem; font-weight:700; margin-bottom:0.4rem;">Overview</h4>
+          <p class="modal-desc" id="modal-project-desc">Description text...</p>
+        </div>
+
+        <div>
+          <h4 style="font-size:0.9rem; font-weight:700; margin-bottom:0.4rem;">Key Highlights & Architecture</h4>
+          <ul class="timeline-points" id="modal-project-highlights" style="margin-top:0.4rem;">
+            <!-- Rendered highlights -->
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size:0.9rem; font-weight:700; margin-bottom:0.4rem;">Tech Stack</h4>
+          <div class="project-tags" id="modal-project-tags"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a href="#" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" id="modal-code-link">
+          <i data-lucide="github" style="width:14px;height:14px;"></i>
+          <span>View Source</span>
+        </a>
+        <a href="#" target="_blank" rel="noopener" class="btn btn-primary btn-sm" id="modal-live-link">
+          <i data-lucide="external-link" style="width:14px;height:14px;"></i>
+          <span>Open Live App</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    // Set dynamic current year in footer
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
