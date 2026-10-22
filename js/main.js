@@ -1,142 +1,124 @@
 /* ===================================================================
-   PORTFOLIO INTERACTIVE ENGINE (Vanilla JS)
-   Spotlight, Command Palette, Interactive Terminal, Filtering, Modals
+   PORTFOLIO ENGINE (Vanilla JS)
+   Nur Aditya Saputra - Web Developer Portfolio
+   Interactive Spotlight, Command Palette, Terminal, Modals, Light/Dark
    =================================================================== */
 
-// Sample Projects Database (Easy for user to edit or expand)
+// ===================================================================
+// DATA DEFINITIONS (All in English matching CV)
+// ===================================================================
+
+const GITHUB_SVG_ICON = `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" style="flex-shrink:0;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>`;
+
 const PROJECTS_DATA = [
   {
-    id: 'proj-7',
+    id: 'crypto-dashboard',
     number: '01',
     title: 'Crypto Market Tracking Dashboard',
     category: 'webapp',
     categoryName: 'Web App',
-    shortDesc: 'Interactive cryptocurrency market monitoring dashboard with live price, volume, and market cap data from CoinGecko API.',
-    fullDesc: 'A responsive crypto market tracking dashboard built with React.js that streams live cryptocurrency data through the CoinGecko API. It displays real-time price movements, trading volume, and total market capitalization, and was developed with AI-assisted workflows for code refactoring and debugging.',
-    tags: ['React.js', 'CSS', 'CoinGecko API', 'Git'],
+    shortDesc: 'Interactive cryptocurrency market tracking web application with live prices, 24h volume, and market capitalization powered by CoinGecko API.',
+    fullDesc: 'A responsive cryptocurrency market tracking dashboard built with React.js using component-based architecture. It integrates the CoinGecko API to dynamically stream live coin prices, 24-hour percentage changes, and market capitalization with auto-updating metrics. Developed with structured AI-assisted workflows (Prompt Engineering) for efficient refactoring, CSS styling, and debugging.',
+    tags: ['React.js', 'CSS', 'CoinGecko API', 'Git', 'RESTful API', 'Responsive UI'],
+    image: 'assets/images/crypto-market-demo.png',
     github: 'https://github.com/NurAditya-dev/crypto-track-market',
     demo: 'https://crypto-track-market.vercel.app/',
     highlights: [
-      'Interactive crypto market monitoring built with React.js component architecture',
-      'CoinGecko API integration for dynamic (auto-updated) price, volume, and market cap data',
-      'AI-assisted development (Prompt Engineering) for code refactoring, CSS optimization, and debugging',
-      'Responsive interface accessible from desktop and mobile'
-    ],
-    preview: PROJECT_PREVIEW
+      'Built an interactive crypto market tracker using React.js with component-based architecture.',
+      'Integrated CoinGecko API to dynamically display crypto price trends, 24h volume, and market capitalization (auto-updated).',
+      'Applied structured AI-Assisted Development (Prompt Engineering) for code refactoring, CSS optimization, and debugging efficiency.',
+      'Designed responsive user interface ensuring optimal accessibility across mobile and desktop devices.'
+    ]
   }
 ];
 
-const PROJECT_PREVIEW = `
-  <svg viewBox="0 0 460 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
-    <rect width="460" height="160" fill="#0b0b0f" rx="8"/>
-    <rect x="0" y="0" width="460" height="34" fill="#16161a"/>
-    <rect x="0" y="34" width="460" height="1" fill="#232328"/>
-    <text x="16" y="25" font-family="ui-monospace, monospace" font-size="10" fill="#b0b0c0">Crypto Market Tracking Dashboard</text>
-    <rect x="16" y="48" width="428" height="100" fill="#0e0e16" stroke="#232328" stroke-width="1" rx="4"/>
-    <line x1="16" y1="86" x2="444" y2="88" stroke="#232328" stroke-width="1"/>
-    <line x1="16" y1="128" x2="444" y2="130" stroke="#232328" stroke-width="1"/>
-    <path d="M16 100 C 60 96, 100 106, 140 99 C 180 92, 220 114, 256 107 C 296 100, 336 120, 376 110 C 416 104, 436 114, 444 110" fill="none" stroke="#8282ff" stroke-width="2.5" stroke-linecap="round"/>
-    <circle cx="444" cy="110" r="4" fill="#8282ff"/>
-    <text x="18" y="52" font-family="ui-monospace, monospace" font-size="6.5" fill="#8a8aaa">Coin • Price • 24H • Mkt Cap</text>
-    <text x="18" y="64" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">1 • BTC</text>
-    <text x="330" y="64" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">$82,122</text>
-    <text x="400" y="64" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">+0.70%</text>
-    <text x="420" y="64" text-anchor="end" opacity="0.5" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">$1.65T</text>
-    <circle cx="382" cy="64" r="4" fill="#23a66b"/>
-    <text x="18" y="82" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">2 • ETH</text>
-    <text x="330" y="82" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">$2,422.47</text>
-    <text x="400" y="82" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">-0.52%</text>
-    <text x="420" y="82" text-anchor="end" opacity="0.5" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">$295B</text>
-    <circle cx="382" cy="82" r="4" fill="#ff5f56"/>
-    <text x="18" y="100" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">3 • USDT</text>
-    <text x="330" y="100" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">$0.999</text>
-    <text x="400" y="100" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">+0.01%</text>
-    <text x="420" y="100" text-anchor="end" opacity="0.5" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">$183B</text>
-    <circle cx="382" cy="100" r="4" fill="#23a66b"/>
-    <text x="18" y="118" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">4 • BNB</text>
-    <text x="330" y="118" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">$722.87</text>
-    <text x="400" y="118" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">+0.32%</text>
-    <text x="420" y="118" text-anchor="end" opacity="0.5" font-family="ui-monospace, monospace" font-size="8.5" fill="#9a9aba">$96B</text>
-    <circle cx="382" cy="118" r="4" fill="#23a66b"/>
-  </svg>
-`;
-
-const PROJECT_META = {
-  github: 'https://github.com/NurAditya-dev',
-  demo: 'https://crypto-track-market.vercel.app/'
-};
-
-// Experience and Education Data
 const TIMELINE_DATA = {
   experience: [
     {
-      role: 'Basketball Event Organizing Committee',
-      company: 'Local Sports Organization',
+      role: 'Panitia Pelaksana Event Bola Basket (Basketball Event Committee)',
+      company: 'Equipment & Logistics Division (Divisi Perlengkapan)',
       period: 'December 2024',
-      desc: 'Operational and logistics coordination for a local sports event attended by 70+ visitors per day.',
+      desc: 'Managed daily operational flow and equipment logistics for a local basketball sports tournament attended by 70+ visitors daily.',
       points: [
-        'Managed the event\'s operational flow and daily logistics.',
-        'Coordinated with multidisciplinary teams to keep match schedules on time and the event running smoothly.'
+        'Organized daily logistical workflows and court facilities to support smooth sports operations.',
+        'Coordinated with multidisciplinary teams to ensure all match schedules ran timely and seamlessly.'
       ]
     }
   ],
   education: [
     {
-      role: 'D4 Informatics Management',
+      role: 'D4 Informatics Management (D4 Manajemen Informatika)',
       company: 'Universitas Negeri Surabaya (UNESA)',
       period: '2026 – Present',
-      desc: 'Informatics management program focused on software development, web applications, and information systems.',
+      desc: 'Undergraduate student focusing on web application engineering, software development, database systems, and interactive UI.',
       points: [
-        'Building interactive web applications with React.js and API integration.',
-        'Strengthening logical thinking and problem-solving skills through OSN Informatics preparation.'
+        'Experienced in building interactive React.js web applications with RESTful API integration.',
+        'Utilizing AI-assisted workflows (Prompt Engineering) alongside standard engineering practices to optimize code quality.'
       ]
     },
     {
-      role: 'SMA Negeri 1 Ketanggungan',
+      role: 'High School Diploma (SMA)',
       company: 'SMA Negeri 1 Ketanggungan',
       period: 'Graduated 2026',
-      desc: 'Secondary education with a foundation in mathematics and informatics.',
+      desc: 'Completed secondary education with strong focus in mathematics, natural sciences, and computational logic.',
       points: [
-        'Participated as a contestant in the National Scientific Olympiad (OSN) — Informatics level.',
-        'Built algorithmic thinking and structured problem-solving skills.'
+        'Built a solid foundation in mathematics, analytical reasoning, and structured algorithmic problem solving.',
+        'Actively engaged in computer science foundations and algorithmic training.'
       ]
     }
   ],
-  certification: [
+  olympiad: [
     {
-      role: 'Gemini Certified University Student',
-      company: 'Gemini University',
-      period: '17 October 2026',
-      desc: 'University certification focused on AI fundamentals and practical AI integration for learning and productivity.',
+      role: 'National Science Olympiad (OSN) in Informatics',
+      company: 'Regency/City Level Participant (Tingkat Kabupaten/Kota)',
+      period: 'SMA Negeri 1 Ketanggungan',
+      desc: 'Official high school representative for SMA Negeri 1 Ketanggungan in the prestigious National Science Olympiad (Olimpiade Sains Nasional - OSN) in Informatics.',
       points: [
-        'Learned AI fundamentals and applied Gemini as an adaptive learning assistant.',
-        'Practiced AI integration into the Google ecosystem (Google Workspace, NotebookLM) to boost productivity.',
-        'Mastered effective, precise, and academically-integrity prompt engineering techniques.'
-      ]
-    },
-    {
-      role: 'Gemini Certified Student',
-      company: 'Google for Education',
-      period: '17 October 2026 – 17 October 2029',
-      desc: 'Certification issued by Google for Education for using Google AI (Gemini) in educational environments.',
-      points: [
-        'Certified to apply Google AI (Gemini) in education.',
-        'Certification valid until 17 October 2029.'
+        'Competed in competitive programming, algorithmic analysis, and computational mathematics.',
+        'Honed analytical thinking, computational efficiency, and rapid debugging skills under competitive constraints.',
+        'Established strong mental discipline and logical deduction applied throughout software engineering projects.'
       ]
     }
   ]
 };
 
-// Available Command Palette actions
+const CERTIFICATIONS_DATA = [
+  {
+    id: 'gemini-university',
+    title: 'Gemini Certified University Student',
+    nativeTitle: 'Siswa Tersertifikasi Gemini - Universitas',
+    issuer: 'Google for Education / Gemini University',
+    issuedDate: '17 October 2026',
+    validUntil: '17 October 2029',
+    image: 'assets/images/gemini-certificate.jpg',
+    badgeText: 'Google for Education',
+    desc: 'Demonstrated fundamental knowledge, practical skills, and competencies required to utilize Google AI (Gemini) effectively within educational and development environments.',
+    points: [
+      'Explored foundational AI principles and practical implementation of Gemini as an adaptive learning and productivity assistant.',
+      'Applied AI integration across Google ecosystem (Google Workspace & NotebookLM) to amplify academic and workflow productivity.',
+      'Mastered effective prompt engineering techniques with precision, structured context, and academic integrity.'
+    ]
+  }
+];
+
 const COMMAND_ACTIONS = [
-  { id: 'nav-about', label: 'Go to About Me', group: 'Navigation', icon: 'user', action: () => scrollToSection('about') },
-  { id: 'nav-projects', label: 'Go to Projects', group: 'Navigation', icon: 'folder-git-2', action: () => scrollToSection('projects') },
-  { id: 'nav-experience', label: 'Go to Experience & Education', group: 'Navigation', icon: 'briefcase', action: () => scrollToSection('experience') },
-  { id: 'nav-skills', label: 'Go to Skills & Stack', group: 'Navigation', icon: 'cpu', action: () => scrollToSection('skills') },
-  { id: 'nav-contact', label: 'Go to Contact', group: 'Navigation', icon: 'mail', action: () => scrollToSection('contact') },
-  { id: 'act-copy-email', label: 'Copy Email Address', group: 'Quick Actions', icon: 'copy', shortcut: 'E', action: () => copyEmailToClipboard() },
-  { id: 'act-theme', label: 'Toggle Dark / Light Theme', group: 'Quick Actions', icon: 'sun-moon', shortcut: 'T', action: () => toggleTheme() },
-  { id: 'act-github', label: 'Visit GitHub Profile', group: 'Social', icon: 'github', action: () => window.open('https://github.com/NurAditya-dev', '_blank') }
+  { id: 'nav-about', label: 'Go to About / Bio (Nur Aditya Saputra)', group: 'Navigation', icon: 'user', action: () => scrollToSection('about') },
+  { id: 'nav-projects-dashboard', label: 'Crypto Market Tracking Dashboard (React.js, CoinGecko API)', group: 'Projects', icon: 'folder-git-2', action: () => scrollToSection('projects') },
+  { id: 'nav-projects', label: 'Go to Featured Projects Section', group: 'Navigation', icon: 'folder-git-2', action: () => scrollToSection('projects') },
+  { id: 'nav-experience', label: 'Work Experience: Basketball Event Committee', group: 'Experience', icon: 'briefcase', action: () => { scrollToSection('experience'); document.querySelector('[data-tab="experience"]')?.click(); } },
+  { id: 'nav-education-unesa', label: 'Education: Universitas Negeri Surabaya (UNESA) D4', group: 'Education', icon: 'graduation-cap', action: () => { scrollToSection('experience'); document.querySelector('[data-tab="education"]')?.click(); } },
+  { id: 'nav-education-sma', label: 'Education: SMA Negeri 1 Ketanggungan', group: 'Education', icon: 'graduation-cap', action: () => { scrollToSection('experience'); document.querySelector('[data-tab="education"]')?.click(); } },
+  { id: 'nav-olympiad', label: 'Olympiad: National Science Olympiad (OSN) in Informatics', group: 'Honors', icon: 'award', action: () => { scrollToSection('experience'); document.querySelector('[data-tab="olympiad"]')?.click(); } },
+  { id: 'nav-certifications', label: 'Certifications: Gemini Certified University Student (Google)', group: 'Certifications', icon: 'award', action: () => scrollToSection('certifications') },
+  { id: 'nav-skills', label: 'Technical Skills & Arsenal (React.js, APIs, Tools)', group: 'Skills', icon: 'cpu', action: () => scrollToSection('skills') },
+  { id: 'nav-terminal', label: 'Open Developer Terminal (Interactive CLI)', group: 'Navigation', icon: 'terminal', action: () => scrollToSection('terminal') },
+  { id: 'nav-contact', label: 'Contact Information (Email, Phone, WhatsApp)', group: 'Contact', icon: 'mail', action: () => scrollToSection('contact') },
+  { id: 'act-live-demo', label: 'Open Live Crypto App Demo (Vercel)', group: 'Quick Actions', icon: 'external-link', shortcut: 'D', action: () => window.open('https://crypto-track-market.vercel.app/', '_blank') },
+  { id: 'act-cert', label: 'View Full Gemini Certificate (Lightbox)', group: 'Quick Actions', icon: 'award', shortcut: 'C', action: () => openCertificateModal() },
+  { id: 'act-copy-email', label: 'Copy Email Address (nuradityasptra10@gmail.com)', group: 'Quick Actions', icon: 'copy', shortcut: 'E', action: () => copyEmailToClipboard() },
+  { id: 'act-copy-phone', label: 'Copy Phone / WhatsApp (0812-2569-2403)', group: 'Quick Actions', icon: 'phone', shortcut: 'P', action: () => copyPhoneToClipboard() },
+  { id: 'act-theme', label: 'Toggle Light / Dark Mode', group: 'Quick Actions', icon: 'sun-moon', shortcut: 'T', action: () => toggleTheme() },
+  { id: 'act-github', label: 'Visit GitHub Repositories (NurAditya-dev)', group: 'Social', icon: 'github', action: () => window.open('https://github.com/NurAditya-dev?tab=repositories', '_blank') }
 ];
 
 /* ===================================================================
@@ -146,78 +128,127 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initSpotlight();
   initLiveClock();
+  initMobileMenu();
   initProjectsGrid();
   initProjectFilter();
   initTimeline();
+  initCertifications();
   initInteractiveTerminal();
   initCommandPalette();
-  initProjectModal();
+  initModals();
   initContactForm();
   initScrollSpy();
+  initFooterYear();
   initLucideIcons();
 });
 
 // Helper for Lucide icons rendering
 function initLucideIcons() {
-  if (window.lucide) {
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
     window.lucide.createIcons();
   }
 }
 
+function initFooterYear() {
+  const el = document.getElementById('footer-year');
+  if (el) el.textContent = new Date().getFullYear();
+}
+
 /* ===================================================================
-   THEME SWITCHER
+   THEME SWITCHER (Dark & Light Mode)
    =================================================================== */
 function initTheme() {
   const savedTheme = localStorage.getItem('portfolio-theme') || 
     (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
   
-  applyTheme(savedTheme);
+  applyTheme(savedTheme, false);
 
   const themeToggles = document.querySelectorAll('.theme-toggle-btn');
   themeToggles.forEach(btn => {
-    btn.addEventListener('click', toggleTheme);
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleTheme();
+    });
   });
 }
 
-function applyTheme(theme) {
+function applyTheme(theme, notify = true) {
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('portfolio-theme', theme);
 
-  const themeIcons = document.querySelectorAll('.theme-icon');
-  themeIcons.forEach(icon => {
-    if (theme === 'light') {
-      icon.setAttribute('data-lucide', 'moon');
-    } else {
-      icon.setAttribute('data-lucide', 'sun');
-    }
-  });
-
-  initLucideIcons();
+  if (notify) {
+    showToast(`Switched to ${theme === 'dark' ? 'Dark' : 'Light'} theme`);
+  }
 }
 
 function toggleTheme() {
   const current = document.documentElement.getAttribute('data-theme') || 'dark';
   const target = current === 'dark' ? 'light' : 'dark';
-  applyTheme(target);
-  showToast(`Switched to ${target} mode`);
+  applyTheme(target, true);
 }
 
 /* ===================================================================
-   MOUSE SPOTLIGHT EFFECT
+   MOBILE NAVIGATION
    =================================================================== */
-function initSpotlight() {
-  const spotlight = document.querySelector('.mouse-spotlight');
+function initMobileMenu() {
+  const toggleBtn = document.getElementById('mobile-toggle');
+  const navLinks = document.getElementById('desktop-nav-links');
+  const backdrop = document.getElementById('mobile-backdrop');
+  const openIcon = document.getElementById('menu-icon-open');
+  const closeIcon = document.getElementById('menu-icon-close');
 
-  window.addEventListener('pointermove', (e) => {
-    const x = e.clientX;
-    const y = e.clientY;
-    document.documentElement.style.setProperty('--mouse-x', `${x}px`);
-    document.documentElement.style.setProperty('--mouse-y', `${y}px`);
+  if (!toggleBtn || !navLinks) return;
+
+  function setMenuState(open) {
+    if (open) {
+      navLinks.classList.add('mobile-open');
+      if (backdrop) backdrop.classList.add('active');
+      if (openIcon) openIcon.style.display = 'none';
+      if (closeIcon) closeIcon.style.display = 'inline-block';
+    } else {
+      navLinks.classList.remove('mobile-open');
+      if (backdrop) backdrop.classList.remove('active');
+      if (openIcon) openIcon.style.display = 'inline-block';
+      if (closeIcon) closeIcon.style.display = 'none';
+    }
+  }
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = navLinks.classList.contains('mobile-open');
+    setMenuState(!isOpen);
   });
 
-  // Card specific spotlight
+  if (backdrop) {
+    backdrop.addEventListener('click', () => setMenuState(false));
+  }
+
+  // Close when clicking nav link
+  navLinks.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      setMenuState(false);
+    });
+  });
+
+  // Close when resizing window past mobile breakpoint
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      setMenuState(false);
+    }
+  });
+}
+
+/* ===================================================================
+   MOUSE SPOTLIGHT & CARD GLOW
+   =================================================================== */
+function initSpotlight() {
+  window.addEventListener('pointermove', (e) => {
+    document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+    document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+  });
+
   document.addEventListener('mousemove', (e) => {
-    const cards = document.querySelectorAll('.project-card, .skill-category-card, .contact-card-sub');
+    const cards = document.querySelectorAll('.project-card, .certificate-card, .skill-category-card, .contact-card-sub');
     cards.forEach(card => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -239,7 +270,6 @@ function initLiveClock() {
     const now = new Date();
     const hours = now.getHours();
     
-    // Greeting
     let greeting = 'Hello';
     if (hours >= 4 && hours < 12) greeting = 'Good Morning';
     else if (hours >= 12 && hours < 18) greeting = 'Good Afternoon';
@@ -247,7 +277,6 @@ function initLiveClock() {
 
     if (greetingEl) greetingEl.textContent = greeting;
 
-    // Time format
     if (timeEl) {
       const formatted = now.toLocaleTimeString('en-US', {
         hour12: false,
@@ -255,7 +284,7 @@ function initLiveClock() {
         minute: '2-digit',
         second: '2-digit'
       });
-      timeEl.textContent = `${formatted} Local Time`;
+      timeEl.textContent = `${formatted} Local Time (Surabaya / WIB)`;
     }
   }
 
@@ -264,7 +293,7 @@ function initLiveClock() {
 }
 
 /* ===================================================================
-   PROJECTS RENDER & FILTER
+   PROJECTS SECTION
    =================================================================== */
 function initProjectsGrid() {
   const grid = document.getElementById('projects-grid');
@@ -283,28 +312,55 @@ function initProjectsGrid() {
       <div class="project-top">
         <span class="project-number">${proj.number} // ${proj.categoryName}</span>
         <div class="project-links">
-          <a href="${proj.github}" target="_blank" rel="noopener" class="project-icon-link" title="Source Code" onclick="event.stopPropagation()">
-            <i data-lucide="github" style="width:16px;height:16px;"></i>
+          <a href="${proj.github}" target="_blank" rel="noopener" class="project-icon-link" title="View Source Code" onclick="event.stopPropagation()">
+            ${GITHUB_SVG_ICON}
           </a>
-          <a href="${proj.demo}" target="_blank" rel="noopener" class="project-icon-link" title="Live Preview" onclick="event.stopPropagation()">
+          <a href="${proj.demo}" target="_blank" rel="noopener" class="project-icon-link" title="Open Live Web App" onclick="event.stopPropagation()">
             <i data-lucide="arrow-up-right" style="width:16px;height:16px;"></i>
           </a>
         </div>
       </div>
       
-      <div class="project-content">
-        <h3>${proj.title} <i data-lucide="chevron-right" style="width:16px;height:16px;opacity:0.4;"></i></h3>
-        <p>${proj.shortDesc}</p>
+      <div class="project-preview" onclick="openProjectImageModal()" title="Click to view full web app screenshot" style="cursor:zoom-in;">
+        <div class="project-image-box">
+          <span class="project-live-indicator">LIVE APP</span>
+          <img src="${proj.image}" alt="${proj.title}" loading="lazy">
+          <div class="project-view-overlay">
+            <i data-lucide="zoom-in" style="width:20px;height:20px;"></i>
+            <span>View Full Image</span>
+          </div>
+        </div>
       </div>
 
-      <div class="project-preview" style="min-height:140px;overflow:hidden;display:flex;align-items:center;justify-content:center;">${proj.preview || ''}</div>
+      <div class="project-content">
+        <h3>
+          <span>${proj.title}</span>
+          <i data-lucide="arrow-right" style="width:16px;height:16px;opacity:0.4;"></i>
+        </h3>
+        <p>${proj.shortDesc}</p>
+      </div>
 
       <div class="project-tags">
         ${tagsHtml}
       </div>
+
+      <div class="project-card-actions" onclick="event.stopPropagation()">
+        <a href="${proj.demo}" target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="flex:1;">
+          <i data-lucide="external-link" style="width:14px;height:14px;"></i>
+          <span>Live Demo</span>
+        </a>
+        <a href="${proj.github}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="flex:1;">
+          ${GITHUB_SVG_ICON}
+          <span>Source Code</span>
+        </a>
+        <button class="btn btn-secondary btn-sm" onclick="openProjectImageModal()" title="View full screenshot" style="padding:0.4rem 0.65rem;">
+          <i data-lucide="zoom-in" style="width:14px;height:14px;"></i>
+          <span>Full Image</span>
+        </button>
+      </div>
     `;
 
-    // Click card to open modal
+    // Click anywhere on card (except direct link buttons) to open details modal
     card.addEventListener('click', () => {
       openProjectModal(proj.id);
     });
@@ -328,10 +384,10 @@ function initProjectFilter() {
 
       cards.forEach(card => {
         const cat = card.getAttribute('data-category');
-        if (filter === 'all' || cat === filter) {
+        if (filter === 'all' || cat === filter || filter === 'react') {
           card.style.display = 'flex';
           card.style.opacity = '0';
-          card.style.transform = 'translateY(10px)';
+          card.style.transform = 'translateY(8px)';
           setTimeout(() => {
             card.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
             card.style.opacity = '1';
@@ -343,73 +399,6 @@ function initProjectFilter() {
       });
     });
   });
-}
-
-/* ===================================================================
-   PROJECT DETAIL MODAL
-   =================================================================== */
-function initProjectModal() {
-  const modal = document.getElementById('project-modal');
-  const closeBtn = document.getElementById('project-modal-close');
-  if (!modal || !closeBtn) return;
-
-  closeBtn.addEventListener('click', closeProjectModal);
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      closeProjectModal();
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
-      closeProjectModal();
-    }
-  });
-}
-
-function openProjectModal(projectId) {
-  const proj = PROJECTS_DATA.find(p => p.id === projectId);
-  if (!proj) return;
-
-  const modal = document.getElementById('project-modal');
-  const titleEl = document.getElementById('modal-project-title');
-  const descEl = document.getElementById('modal-project-desc');
-  const tagsEl = document.getElementById('modal-project-tags');
-  const highlightsEl = document.getElementById('modal-project-highlights');
-  const liveLinkEl = document.getElementById('modal-live-link');
-  const codeLinkEl = document.getElementById('modal-code-link');
-  const previewEl = document.getElementById('modal-project-preview');
-
-  if (titleEl) titleEl.textContent = proj.title;
-  if (descEl) descEl.textContent = proj.fullDesc;
-
-  if (tagsEl) {
-    tagsEl.innerHTML = proj.tags.map(t => `<span class="tag-badge">${t}</span>`).join('');
-  }
-
-  if (highlightsEl) {
-    highlightsEl.innerHTML = proj.highlights.map(h => `<li>${h}</li>`).join('');
-  }
-
-  if (previewEl && proj.preview) {
-    previewEl.innerHTML = proj.preview;
-  }
-
-  if (liveLinkEl) liveLinkEl.href = proj.demo;
-  if (codeLinkEl) codeLinkEl.href = proj.github;
-
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-  initLucideIcons();
-}
-
-function closeProjectModal() {
-  const modal = document.getElementById('project-modal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
 }
 
 /* ===================================================================
@@ -445,9 +434,11 @@ function initTimeline() {
       `;
       container.appendChild(el);
     });
+
+    initLucideIcons();
   }
 
-  // Initial render with experience
+  // Initial render
   render('experience');
 
   tabBtns.forEach(btn => {
@@ -461,67 +452,343 @@ function initTimeline() {
 }
 
 /* ===================================================================
-   INTERACTIVE TERMINAL WIDGET
+   CERTIFICATIONS SECTION
+   =================================================================== */
+function initCertifications() {
+  const container = document.getElementById('certifications-container');
+  if (!container) return;
+
+  container.innerHTML = '';
+  CERTIFICATIONS_DATA.forEach(cert => {
+    const card = document.createElement('div');
+    card.className = 'certificate-card';
+
+    const pointsHtml = cert.points.map(p => `<li>${p}</li>`).join('');
+
+    card.innerHTML = `
+      <div class="cert-thumb-wrapper" onclick="openCertificateModal()" title="Click to view full certificate">
+        <img src="${cert.image}" alt="${cert.title} Certificate" class="cert-thumb-img">
+        <div class="cert-thumb-overlay">
+          <i data-lucide="zoom-in" style="width:20px;height:20px;"></i>
+          <span>Enlarge Certificate</span>
+        </div>
+      </div>
+
+      <div class="cert-details">
+        <div class="cert-badge-row">
+          <span class="cert-badge status-valid">
+            <i data-lucide="check-circle" style="width:12px;height:12px;"></i> Verified Credential
+          </span>
+          <span class="cert-badge">
+            <i data-lucide="shield" style="width:12px;height:12px;"></i> ${cert.badgeText}
+          </span>
+          <span class="cert-badge">
+            <i data-lucide="calendar" style="width:12px;height:12px;"></i> Valid: ${cert.issuedDate} – ${cert.validUntil}
+          </span>
+        </div>
+
+        <h3 class="cert-title">${cert.title}</h3>
+        <div class="cert-issuer">${cert.nativeTitle} · ${cert.issuer}</div>
+        <p class="cert-desc">${cert.desc}</p>
+
+        <ul class="timeline-points">
+          ${pointsHtml}
+        </ul>
+
+        <div class="cert-actions">
+          <button class="btn btn-primary btn-sm" onclick="openCertificateModal()">
+            <i data-lucide="zoom-in" style="width:14px;height:14px;"></i>
+            <span>View Full Certificate</span>
+          </button>
+          <a href="${cert.image}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+            <i data-lucide="external-link" style="width:14px;height:14px;"></i>
+            <span>Open High-Res File</span>
+          </a>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+
+  initLucideIcons();
+}
+
+/* ===================================================================
+   MODALS (Project Details & Certificate Lightbox)
+   =================================================================== */
+function initModals() {
+  // Project Modal
+  const projModal = document.getElementById('project-modal');
+  const projCloseBtn = document.getElementById('project-modal-close');
+
+  if (projModal && projCloseBtn) {
+    projCloseBtn.addEventListener('click', closeProjectModal);
+    projModal.addEventListener('click', (e) => {
+      if (e.target === projModal) closeProjectModal();
+    });
+  }
+
+  // Certificate Modal
+  const certModal = document.getElementById('certificate-modal');
+  const certCloseBtn = document.getElementById('cert-modal-close');
+
+  if (certModal && certCloseBtn) {
+    certCloseBtn.addEventListener('click', closeCertificateModal);
+    certModal.addEventListener('click', (e) => {
+      if (e.target === certModal) closeCertificateModal();
+    });
+  }
+
+  // Project Image Modal (Full Lightbox)
+  const projImgModal = document.getElementById('project-image-modal');
+  const projImgCloseBtn = document.getElementById('project-image-modal-close');
+
+  if (projImgModal && projImgCloseBtn) {
+    projImgCloseBtn.addEventListener('click', closeProjectImageModal);
+    projImgModal.addEventListener('click', (e) => {
+      if (e.target === projImgModal) closeProjectImageModal();
+    });
+  }
+
+  // Global Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeProjectModal();
+      closeCertificateModal();
+      closeProjectImageModal();
+    }
+  });
+}
+
+function openProjectImageModal() {
+  const modal = document.getElementById('project-image-modal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    initLucideIcons();
+  }
+}
+
+function closeProjectImageModal() {
+  const modal = document.getElementById('project-image-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+window.openProjectImageModal = openProjectImageModal;
+window.closeProjectImageModal = closeProjectImageModal;
+
+function openProjectModal(projectId) {
+  const proj = PROJECTS_DATA.find(p => p.id === projectId);
+  if (!proj) return;
+
+  const modal = document.getElementById('project-modal');
+  const titleEl = document.getElementById('modal-project-title');
+  const descEl = document.getElementById('modal-project-desc');
+  const tagsEl = document.getElementById('modal-project-tags');
+  const highlightsEl = document.getElementById('modal-project-highlights');
+  const liveLinkEl = document.getElementById('modal-live-link');
+  const codeLinkEl = document.getElementById('modal-code-link');
+  const bannerEl = document.getElementById('modal-project-preview');
+
+  if (titleEl) titleEl.textContent = proj.title;
+  if (descEl) descEl.textContent = proj.fullDesc;
+
+  if (bannerEl) {
+    bannerEl.innerHTML = `
+      <a href="${proj.image}" target="_blank" rel="noopener" title="Click to view full image in high resolution" style="display:block; width:100%; cursor:zoom-in;">
+        <img src="${proj.image}" alt="${proj.title}" style="width:100%; max-height:360px; object-fit:contain; display:block;">
+      </a>
+    `;
+  }
+
+  const imageFullLink = document.getElementById('modal-image-full-link');
+  if (imageFullLink) {
+    imageFullLink.href = proj.image;
+  }
+
+  if (tagsEl) {
+    tagsEl.innerHTML = proj.tags.map(t => `<span class="tag-badge">${t}</span>`).join('');
+  }
+
+  if (highlightsEl) {
+    highlightsEl.innerHTML = proj.highlights.map(h => `<li>${h}</li>`).join('');
+  }
+
+  if (liveLinkEl) liveLinkEl.href = proj.demo;
+  if (codeLinkEl) codeLinkEl.href = proj.github;
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  initLucideIcons();
+}
+
+function closeProjectModal() {
+  const modal = document.getElementById('project-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function openCertificateModal() {
+  const modal = document.getElementById('certificate-modal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    initLucideIcons();
+  }
+}
+
+function closeCertificateModal() {
+  const modal = document.getElementById('certificate-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+/* ===================================================================
+   INTERACTIVE DEVELOPER TERMINAL
    =================================================================== */
 function initInteractiveTerminal() {
   const input = document.getElementById('term-input');
   const output = document.getElementById('term-output');
+  const clearBtn = document.getElementById('term-clear-btn');
+  const body = document.getElementById('term-body');
   if (!input || !output) return;
 
-  const commandResponses = {
-    help: `Available commands:
-  - about       : Brief overview of my work & philosophy
-  - skills      : Core technical abilities & stack
-  - projects    : Highlights of featured works
-  - contact     : Get in touch & copy email
-  - theme       : Toggle dark and light mode
-  - date        : Display current system timestamp
-  - clear       : Clear terminal window
-  - sudo        : Superuser override test`,
-    about: `I am Nur Aditya Saputra, a D4 Informatics Management student at Universitas Negeri Surabaya (UNESA). I build interactive web applications with React.js and API integration, and I optimize development workflows using AI-assisted and manual tools.`,
-    skills: `Technical Core:
-  - Frontend : React.js, JavaScript, HTML, CSS, Responsive Web Design
-  - API & Data : RESTful API Integration
-  - Workflow  : Git, GitHub, VS Code, AI-Assisted Development (Prompt Engineering)
-  - Tools & Languages : Canva, CapCut, Microsoft Office | Indonesian (Native), English (Intermediate)`,
-    projects: `Featured Projects:
-  1. Crypto Market Tracking Dashboard (React.js, CSS, CoinGecko API, Git)
-  Type 'contact' to collaborate on this project!`,
-    contact: `You can reach me at: nuradityasptra10@gmail.com
-  GitHub     : https://github.com/NurAditya-dev
-  Phone      : 0812-2569-2403
-  (Copied email to clipboard!)`,
-    date: () => `Current local time: ${new Date().toString()}`,
-    sudo: `Permission denied: You are already a superuser in our hearts. 😉`,
-    clear: '__CLEAR__'
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      output.innerHTML = '';
+      appendTermLine(`guest@nuraditya:~$ screen cleared.`);
+    });
+  }
+
+  const commands = {
+    help: `Available interactive commands:
+  - about       : Brief overview of my background & focus
+  - projects    : Details on featured web development projects
+  - cert        : View Gemini certification & credentials
+  - skills      : Core technical capabilities and stack
+  - edu         : Formal education background (UNESA & SMA)
+  - olympiad    : National Science Olympiad (OSN) in Informatics
+  - exp         : Leadership & committee experience
+  - contact     : Direct contact info & auto-copy email
+  - live        : Open live demo of Crypto Market Tracking Dashboard
+  - repo        : Open GitHub repositories (https://github.com/NurAditya-dev?tab=repositories)
+  - theme       : Toggle dark and light theme
+  - time        : Display current local timestamp
+  - clear       : Clear terminal window`,
+    
+    about: `Nur Aditya Saputra
+D4 Informatics Management student at Universitas Negeri Surabaya (UNESA).
+Specializing in React.js and dynamic RESTful API integration.
+Logical thinking & analytical problem solving sharpened through OSN Informatics.
+Optimizing development workflows with AI-assisted engineering (Prompt Engineering).`,
+
+    projects: `Featured Project:
+[01] Crypto Market Tracking Dashboard
+  - Tech Stack  : React.js, CSS, CoinGecko API, Git
+  - Live Demo   : https://crypto-track-market.vercel.app/
+  - Repository  : https://github.com/NurAditya-dev/crypto-track-market
+  - Description : Live crypto tracker featuring real-time prices, 24h volume, and market cap auto-updates.
+Type 'live' to open the app or 'repo' to inspect the code!`,
+
+    cert: `Certification:
+[01] Gemini Certified University Student (Siswa Tersertifikasi Gemini)
+  - Authority   : Google for Education / Gemini University
+  - Issued Date : 17 October 2026
+  - Valid Until : 17 October 2029
+  - Focus       : Foundational AI, Gemini for productivity & adaptive learning, prompt engineering.`,
+
+    skills: `Technical Core & Arsenal:
+  - Code Skills : React.js, JavaScript (ES6+), HTML5, CSS3, Responsive Web Design
+  - API & Data  : RESTful API Integration, Asynchronous JS, JSON Data Parsing, CoinGecko API
+  - Workflow    : Git, GitHub, VS Code, AI-Assisted Development (Prompt Engineering)
+  - Tools       : Canva, CapCut, Microsoft Office
+  - Languages   : Indonesian (Native), English (Intermediate)`,
+
+    edu: `Formal Education:
+  1. Universitas Negeri Surabaya (UNESA) (2026 – Present)
+     - D4 Informatics Management (D4 Manajemen Informatika)
+     - Focus: Web application engineering, React.js, RESTful APIs, and database architecture.
+  2. SMA Negeri 1 Ketanggungan (Graduated 2026)
+     - High School Diploma (SMA)
+     - Focus: Mathematics, natural sciences, and analytical foundations.`,
+
+    olympiad: `National Science Olympiad (OSN):
+  - Competition : National Science Olympiad (OSN) in Informatics
+  - Level       : Regency/City Level Participant (Tingkat Kabupaten/Kota)
+  - Institution : SMA Negeri 1 Ketanggungan
+  - Focus       : Competitive programming, computational logic, and algorithmic optimization.`,
+
+    osn: `National Science Olympiad (OSN):
+  - Competition : National Science Olympiad (OSN) in Informatics
+  - Level       : Regency/City Level Participant (Tingkat Kabupaten/Kota)
+  - Institution : SMA Negeri 1 Ketanggungan
+  - Focus       : Competitive programming, computational logic, and algorithmic optimization.`,
+
+    exp: `Experience:
+  - Basketball Event Organizing Committee (Panitia Pelaksana Event Bola Basket)
+    - Division : Equipment & Logistics (Divisi Perlengkapan) · Dec 2024
+    - Managed operational and logistical flow for 70+ visitors daily.`,
+
+    contact: `Contact Channels:
+  - Email    : nuradityasptra10@gmail.com (Copied to clipboard!)
+  - Phone    : 0812-2569-2403 / +62 812-2569-2403
+  - Location : Surabaya, Jawa Timur, Indonesia
+  - GitHub   : https://github.com/NurAditya-dev`,
+
+    live: () => {
+      window.open('https://crypto-track-market.vercel.app/', '_blank');
+      return 'Opened live crypto app in a new tab: https://crypto-track-market.vercel.app/';
+    },
+
+    repo: () => {
+      window.open('https://github.com/NurAditya-dev?tab=repositories', '_blank');
+      return 'Redirecting to GitHub repositories: https://github.com/NurAditya-dev?tab=repositories';
+    },
+
+    repositories: () => {
+      window.open('https://github.com/NurAditya-dev?tab=repositories', '_blank');
+      return 'Redirecting to GitHub repositories: https://github.com/NurAditya-dev?tab=repositories';
+    },
+
+    time: () => `Current local time: ${new Date().toLocaleString()}`
   };
 
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-      const val = input.value.trim().toLowerCase();
+      const raw = input.value.trim();
+      const val = raw.toLowerCase();
       if (!val) return;
 
-      appendTermLine(`guest@portfolio:~$ ${input.value}`);
+      appendTermLine(`guest@nuraditya:~$ ${raw}`);
 
       if (val === 'clear') {
         output.innerHTML = '';
       } else if (val === 'contact') {
         copyEmailToClipboard();
-        appendTermLine(commandResponses.contact);
+        appendTermLine(commands.contact);
       } else if (val === 'theme') {
         toggleTheme();
-        appendTermLine(`Toggled theme to ${document.documentElement.getAttribute('data-theme')}`);
-      } else if (typeof commandResponses[val] === 'function') {
-        appendTermLine(commandResponses[val]());
-      } else if (commandResponses[val]) {
-        appendTermLine(commandResponses[val]);
+        appendTermLine(`Toggled theme to ${document.documentElement.getAttribute('data-theme')} mode.`);
+      } else if (typeof commands[val] === 'function') {
+        appendTermLine(commands[val]());
+      } else if (commands[val]) {
+        appendTermLine(commands[val]);
       } else {
-        appendTermLine(`bash: command not found: "${val}". Type "help" for a list of commands.`);
+        appendTermLine(`bash: command not found: "${raw}". Type "help" to see available commands.`);
       }
 
       input.value = '';
-      const body = document.querySelector('.terminal-body');
-      if (body) body.scrollTop = body.scrollHeight;
+      if (body) {
+        body.scrollTop = body.scrollHeight;
+      }
     }
   });
 
@@ -543,20 +810,25 @@ function initCommandPalette() {
   const triggers = document.querySelectorAll('.cmd-trigger-btn');
   if (!modal || !input || !list) return;
 
+  let selectedIndex = 0;
+  let currentFiltered = [];
+
   function renderList(query = '') {
     list.innerHTML = '';
-    const filtered = COMMAND_ACTIONS.filter(item => 
+    currentFiltered = COMMAND_ACTIONS.filter(item => 
       item.label.toLowerCase().includes(query.toLowerCase()) || 
       item.group.toLowerCase().includes(query.toLowerCase())
     );
 
-    if (filtered.length === 0) {
+    if (currentFiltered.length === 0) {
       list.innerHTML = `<li style="padding:1.5rem; text-align:center; color:var(--text-muted); font-size:0.85rem;">No commands found for "${query}"</li>`;
       return;
     }
 
+    selectedIndex = 0;
     let currentGroup = '';
-    filtered.forEach((item, index) => {
+
+    currentFiltered.forEach((item, index) => {
       if (item.group !== currentGroup) {
         currentGroup = item.group;
         const groupHeader = document.createElement('div');
@@ -566,12 +838,16 @@ function initCommandPalette() {
       }
 
       const li = document.createElement('li');
-      li.className = `cmd-item ${index === 0 ? 'selected' : ''}`;
+      li.className = `cmd-item ${index === selectedIndex ? 'selected' : ''}`;
       li.setAttribute('data-index', index);
+
+      const iconHtml = item.icon === 'github'
+        ? GITHUB_SVG_ICON
+        : `<i data-lucide="${item.icon}" style="width:16px;height:16px;color:var(--text-muted);"></i>`;
 
       li.innerHTML = `
         <div class="cmd-item-left">
-          <i data-lucide="${item.icon}" style="width:16px;height:16px;color:var(--text-muted);"></i>
+          ${iconHtml}
           <span>${item.label}</span>
         </div>
         ${item.shortcut ? `<span class="cmd-shortcut">${item.shortcut}</span>` : ''}
@@ -588,18 +864,42 @@ function initCommandPalette() {
     initLucideIcons();
   }
 
+  function updateSelection() {
+    const items = list.querySelectorAll('.cmd-item');
+    items.forEach((item, idx) => {
+      if (idx === selectedIndex) {
+        item.classList.add('selected');
+        item.scrollIntoView({ block: 'nearest' });
+      } else {
+        item.classList.remove('selected');
+      }
+    });
+  }
+
   function openCommandPalette() {
     modal.classList.add('active');
     input.value = '';
     renderList('');
-    setTimeout(() => input.focus(), 50);
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      input.focus();
+      input.select();
+    }, 40);
   }
 
   function closeCommandPalette() {
     modal.classList.remove('active');
+    document.body.style.overflow = '';
   }
 
-  triggers.forEach(t => t.addEventListener('click', openCommandPalette));
+  // Expose globally for direct button invocation
+  window.openCommandPalette = openCommandPalette;
+  window.closeCommandPalette = closeCommandPalette;
+
+  triggers.forEach(t => t.addEventListener('click', (e) => {
+    e.preventDefault();
+    openCommandPalette();
+  }));
 
   modal.addEventListener('click', (e) => {
     if (e.target === modal) closeCommandPalette();
@@ -609,10 +909,34 @@ function initCommandPalette() {
     renderList(e.target.value.trim());
   });
 
-  // Keyboard shortcut listener: Ctrl+K / Cmd+K
-  document.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') {
       e.preventDefault();
+      if (currentFiltered.length > 0) {
+        selectedIndex = (selectedIndex + 1) % currentFiltered.length;
+        updateSelection();
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (currentFiltered.length > 0) {
+        selectedIndex = (selectedIndex - 1 + currentFiltered.length) % currentFiltered.length;
+        updateSelection();
+      }
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (currentFiltered[selectedIndex]) {
+        closeCommandPalette();
+        currentFiltered[selectedIndex].action();
+      }
+    }
+  });
+
+  // Global Keyboard shortcuts: Ctrl+K / Cmd+K
+  document.addEventListener('keydown', (e) => {
+    const isK = e.key === 'k' || e.key === 'K' || e.code === 'KeyK';
+    if ((e.ctrlKey || e.metaKey) && isK) {
+      e.preventDefault();
+      e.stopPropagation();
       if (modal.classList.contains('active')) {
         closeCommandPalette();
       } else {
@@ -625,67 +949,79 @@ function initCommandPalette() {
 }
 
 /* ===================================================================
-   CONTACT FORM & TOAST
+   CONTACT FORM & CLIPBOARD ACTIONS
    =================================================================== */
 function initContactForm() {
   const form = document.getElementById('portfolio-contact-form');
-  const copyBtn = document.getElementById('copy-email-btn');
-
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      copyEmailToClipboard();
-    });
-  }
 
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const submitBtn = form.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
+      const originalHtml = submitBtn.innerHTML;
 
       submitBtn.innerHTML = `<span>Sending...</span>`;
       submitBtn.disabled = true;
 
       setTimeout(() => {
-        showToast('Message sent successfully! I will reply soon.');
+        showToast('Message received! Thank you, I will reply shortly.');
         form.reset();
-        submitBtn.innerHTML = originalText;
+        submitBtn.innerHTML = originalHtml;
         submitBtn.disabled = false;
         initLucideIcons();
-      }, 1000);
+      }, 900);
     });
   }
 }
 
 function copyEmailToClipboard() {
   const email = 'nuradityasptra10@gmail.com';
+  copyText(email, 'Email copied to clipboard: nuradityasptra10@gmail.com');
+}
+
+function copyPhoneToClipboard() {
+  const phone = '0812-2569-2403';
+  copyText(phone, 'Phone number copied to clipboard: 0812-2569-2403');
+}
+
+function copyText(text, successMessage) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(email).then(() => {
-      showToast('Email copied to clipboard!');
-    });
+    navigator.clipboard.writeText(text).then(() => {
+      showToast(successMessage);
+    }).catch(() => fallbackCopy(text, successMessage));
   } else {
-    // Fallback
-    const temp = document.createElement('textarea');
-    temp.value = email;
-    document.body.appendChild(temp);
-    temp.select();
-    document.execCommand('copy');
-    document.body.removeChild(temp);
-    showToast('Email copied to clipboard!');
+    fallbackCopy(text, successMessage);
   }
 }
 
+function fallbackCopy(text, successMessage) {
+  const temp = document.createElement('textarea');
+  temp.value = text;
+  temp.style.position = 'fixed';
+  temp.style.opacity = '0';
+  document.body.appendChild(temp);
+  temp.select();
+  try {
+    document.execCommand('copy');
+    showToast(successMessage);
+  } catch (err) {
+    showToast('Failed to copy text.');
+  }
+  document.body.removeChild(temp);
+}
+
 function showToast(message) {
-  let container = document.querySelector('.toast-container');
+  let container = document.getElementById('toast-container');
   if (!container) {
     container = document.createElement('div');
+    container.id = 'toast-container';
     container.className = 'toast-container';
     document.body.appendChild(container);
   }
 
   const toast = document.createElement('div');
   toast.className = 'toast';
-  toast.innerHTML = `<i data-lucide="check-circle-2" style="width:16px;height:16px;"></i> <span>${message}</span>`;
+  toast.innerHTML = `<i data-lucide="check-circle-2" style="width:16px;height:16px;flex-shrink:0;"></i> <span>${message}</span>`;
   container.appendChild(toast);
   initLucideIcons();
 
@@ -696,13 +1032,11 @@ function showToast(message) {
   }, 3100);
 }
 
-/* ===================================================================
-   NAVIGATION & SCROLL SPY
-   =================================================================== */
+/*NAVIGATION & SCROLL SPY*/
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (el) {
-    const yOffset = -80;
+    const yOffset = -75;
     const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
@@ -711,20 +1045,6 @@ function scrollToSection(id) {
 function initScrollSpy() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
-  const mobileToggle = document.getElementById('mobile-toggle');
-  const navLinksContainer = document.querySelector('.nav-links');
-
-  if (mobileToggle && navLinksContainer) {
-    mobileToggle.addEventListener('click', () => {
-      navLinksContainer.classList.toggle('mobile-open');
-    });
-
-    navLinks.forEach(l => {
-      l.addEventListener('click', () => {
-        navLinksContainer.classList.remove('mobile-open');
-      });
-    });
-  }
 
   window.addEventListener('scroll', () => {
     let current = '';

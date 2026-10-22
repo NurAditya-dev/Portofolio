@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio — Developer & Designer</title>
-  <meta name="description" content="Minimalist, monochromatic personal portfolio template featuring high performance and interactive UI.">
+  <title>Nur Aditya Saputra &mdash; Portfolio | Web Developer</title>
+  <meta name="description" content="Personal portfolio of Nur Aditya Saputra - D4 Informatics Management student at UNESA, Web Developer specializing in React.js and RESTful API integration.">
   <meta name="author" content="Nur Aditya Saputra">
 
   <!-- Favicon (Clean SVG monochrome monogram) -->
@@ -28,15 +28,16 @@
   <header class="site-header">
     <nav class="nav-shell">
       <a href="#about" class="brand">
-        <span class="brand-dot" title="Available for work"></span>
-        <span>dev.folio</span>
+        <span class="brand-dot" title="Available for opportunities"></span>
+        <span class="brand-name">Nur Aditya</span>
       </a>
 
       <!-- Desktop Links -->
-      <ul class="nav-links">
+      <ul class="nav-links" id="desktop-nav-links">
         <li><a href="#about" class="nav-link active">About</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#certifications" class="nav-link">Certifications</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
         <li><a href="#terminal" class="nav-link">Terminal</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -45,23 +46,29 @@
       <!-- Action items -->
       <div class="nav-actions">
         <!-- Command Palette Trigger Button -->
-        <button class="cmd-trigger cmd-trigger-btn" title="Quick Navigation (Ctrl+K)">
+        <button class="cmd-trigger cmd-trigger-btn" onclick="openCommandPalette()" title="Search & Quick Navigation (Ctrl+K)" aria-label="Open search dialog">
+          <i data-lucide="search" style="width:14px;height:14px;"></i>
           <span>Search</span>
           <span class="kbd">Ctrl K</span>
         </button>
 
         <!-- Theme Toggle (Dark/Light) -->
-        <button class="icon-btn theme-toggle-btn" title="Switch Theme" aria-label="Toggle theme">
-          <i data-lucide="sun" class="theme-icon" style="width:16px;height:16px;"></i>
+        <button class="icon-btn theme-toggle-btn" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
+          <i data-lucide="sun" class="theme-icon sun-icon" style="width:17px;height:17px;"></i>
+          <i data-lucide="moon" class="theme-icon moon-icon" style="width:17px;height:17px;"></i>
         </button>
 
         <!-- Mobile Menu Hamburger -->
-        <button class="icon-btn mobile-menu-btn" id="mobile-toggle" aria-label="Open navigation menu">
-          <i data-lucide="menu" style="width:18px;height:18px;"></i>
+        <button class="icon-btn mobile-menu-btn" id="mobile-toggle" aria-label="Toggle navigation menu">
+          <i data-lucide="menu" id="menu-icon-open" style="width:18px;height:18px;"></i>
+          <i data-lucide="x" id="menu-icon-close" style="width:18px;height:18px;display:none;"></i>
         </button>
       </div>
     </nav>
   </header>
+
+  <!-- Mobile Backdrop Overlay -->
+  <div class="mobile-nav-backdrop" id="mobile-backdrop"></div>
 
   <!-- =================================================================
        MAIN CONTENT CONTAINER
@@ -73,30 +80,34 @@
       <div class="hero-header">
         <div class="status-pill">
           <span class="dot"></span>
-          <span id="hero-greeting-text">Hello</span> — <span id="hero-live-time">Loading local time...</span>
+          <span id="hero-greeting-text">Hello</span> &mdash; <span id="hero-live-time">Loading local time...</span>
         </div>
 
         <h1 class="hero-title">
-          Building thoughtful software with clean code & 
-          <span class="text-muted">zero visual clutter.</span>
+          Building interactive web apps with React.js & 
+          <span class="text-muted">clean API integration.</span>
         </h1>
 
         <p class="hero-bio">
-          I'm <strong>Nur Aditya Saputra</strong>, a D4 Informatics Management student at Universitas Negeri Surabaya (UNESA). I build interactive web applications with React.js and API integration, backed by strong logical thinking and problem-solving skills from OSN Informatics.
+          I am <strong>Nur Aditya Saputra</strong>, an Informatics Management (D4) student at Universitas Negeri Surabaya (UNESA). I specialize in developing interactive web applications with React.js and dynamic RESTful API integration, backed by strong logical thinking and problem-solving skills honed through the National Science Olympiad (OSN) in Informatics. I optimize development workflows using both AI-assisted (Prompt Engineering) and standard engineering tools for maximum productivity and code quality.
         </p>
 
         <div class="hero-meta">
           <div class="meta-item">
-            <i data-lucide="map-pin" style="width:14px;height:14px;"></i>
+            <i data-lucide="map-pin" style="width:15px;height:15px;"></i>
             <span>Surabaya, Jawa Timur</span>
           </div>
           <div class="meta-item">
-            <i data-lucide="briefcase" style="width:14px;height:14px;"></i>
-            <span>Open for full-time & freelance</span>
+            <i data-lucide="graduation-cap" style="width:15px;height:15px;"></i>
+            <span>UNESA (D4 Manajemen Informatika)</span>
           </div>
           <div class="meta-item">
-            <i data-lucide="code-2" style="width:14px;height:14px;"></i>
-            <span>React.js, JavaScript, HTML, CSS, RESTful API</span>
+            <i data-lucide="code-2" style="width:15px;height:15px;"></i>
+            <span>React.js · RESTful API · JavaScript · CSS</span>
+          </div>
+          <div class="meta-item">
+            <i data-lucide="award" style="width:15px;height:15px;"></i>
+            <span>Gemini Certified by Google for Education</span>
           </div>
         </div>
 
@@ -105,12 +116,19 @@
             <span>Explore Projects</span>
             <i data-lucide="arrow-down-right" style="width:16px;height:16px;"></i>
           </a>
+          <a href="https://crypto-track-market.vercel.app/" target="_blank" rel="noopener" class="btn btn-secondary">
+            <i data-lucide="external-link" style="width:16px;height:16px;"></i>
+            <span>Live Crypto App</span>
+          </a>
           <button class="btn btn-secondary" onclick="copyEmailToClipboard()">
             <i data-lucide="copy" style="width:16px;height:16px;"></i>
             <span>Copy Email</span>
           </button>
-          <a href="#contact" class="btn btn-secondary">
-            <span>Contact Me</span>
+          <a href="https://github.com/NurAditya-dev" target="_blank" rel="noopener" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" style="flex-shrink:0;">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+            </svg>
+            <span>GitHub</span>
           </a>
         </div>
       </div>
@@ -120,24 +138,21 @@
     <section class="section" id="projects">
       <div class="section-header">
         <div>
-          <div class="section-tag">01. Selected Works</div>
+          <div class="section-tag">01. Web Development Project</div>
           <h2 class="section-title">Featured Projects</h2>
-          <p class="section-desc">Selected applications, open source libraries, and design explorations crafted with precision.</p>
+          <p class="section-desc">Interactive web applications built with React.js, real-time API streaming, and responsive design.</p>
         </div>
 
         <!-- Filter Tabs -->
         <div class="filter-tabs">
-          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn active" data-filter="all">All Projects</button>
           <button class="filter-btn" data-filter="webapp">Web App</button>
-          <button class="filter-btn" data-filter="tools">Dev Tools</button>
-          <button class="filter-btn" data-filter="uiux">UI/UX</button>
-          <button class="filter-btn" data-filter="mobile">Mobile</button>
         </div>
       </div>
 
       <!-- Projects Grid populated by JavaScript -->
       <div class="projects-grid" id="projects-grid">
-        <!-- Rendered via js/main.js with fallback structure -->
+        <!-- Rendered dynamically via js/main.js -->
       </div>
     </section>
 
@@ -147,13 +162,13 @@
         <div>
           <div class="section-tag">02. Career & Background</div>
           <h2 class="section-title">Experience & Education</h2>
-          <p class="section-desc">My professional journey, roles held, and technical qualifications.</p>
+          <p class="section-desc">Educational qualifications, competitive olympiad achievements, and leadership experience.</p>
         </div>
 
         <div class="timeline-tabs">
-          <button class="timeline-tab-btn active" data-tab="experience">Work Experience</button>
+          <button class="timeline-tab-btn active" data-tab="experience">Work & Organization</button>
           <button class="timeline-tab-btn" data-tab="education">Education</button>
-          <button class="timeline-tab-btn" data-tab="certification">Certification</button>
+          <button class="timeline-tab-btn" data-tab="olympiad">Olympiad & Achievements</button>
         </div>
       </div>
 
@@ -163,69 +178,106 @@
       </div>
     </section>
 
+    <!-- ========================= CERTIFICATIONS SECTION ========================= -->
+    <section class="section" id="certifications">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">03. Verified Credentials</div>
+          <h2 class="section-title">Certifications & Training</h2>
+          <p class="section-desc">Official certifications issued by global technology leaders in Artificial Intelligence and Education.</p>
+        </div>
+      </div>
+
+      <div class="certifications-container" id="certifications-container">
+        <!-- Rendered via js/main.js -->
+      </div>
+    </section>
+
     <!-- ========================= SKILLS SECTION ========================= -->
     <section class="section" id="skills">
       <div class="section-header">
         <div>
-          <div class="section-tag">03. Capabilities</div>
-          <h2 class="section-title">Skills & Arsenal</h2>
-          <p class="section-desc">Technologies and tools I work with daily to bring products to life.</p>
+          <div class="section-tag">04. Technical Capabilities</div>
+          <h2 class="section-title">Technical Skills & Arsenal</h2>
+          <p class="section-desc">Technologies, frameworks, APIs, and workflows I use for development.</p>
         </div>
       </div>
 
       <div class="skills-grid">
-        <!-- Frontend Engineering -->
+        <!-- Coding Skills -->
         <div class="skill-category-card">
           <h3 class="skill-cat-title">
-            <i data-lucide="layout" style="width:16px;height:16px;"></i>
-            Frontend Engineering
+            <i data-lucide="code" style="width:18px;height:18px;"></i>
+            Code Skills
           </h3>
+          <p class="skill-cat-desc">Core web programming languages and frontend architecture.</p>
           <div class="skill-items">
-            <span class="skill-pill">React.js</span>
-            <span class="skill-pill">JavaScript</span>
-            <span class="skill-pill">HTML</span>
-            <span class="skill-pill">CSS</span>
-            <span class="skill-pill">Responsive Web Design</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> React.js</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> JavaScript (ES6+)</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> HTML5</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> CSS3</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> Responsive Web Design</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> Component Architecture</span>
           </div>
         </div>
 
         <!-- API & Data -->
         <div class="skill-category-card">
           <h3 class="skill-cat-title">
-            <i data-lucide="server" style="width:16px;height:16px;"></i>
+            <i data-lucide="database" style="width:18px;height:18px;"></i>
             API & Data
           </h3>
+          <p class="skill-cat-desc">Dynamic data streaming and external service integrations.</p>
           <div class="skill-items">
-            <span class="skill-pill">RESTful API Integration</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> RESTful API Integration</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> Asynchronous JavaScript</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> JSON Data Parsing</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> CoinGecko API Integration</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> Dynamic State Management</span>
           </div>
         </div>
 
-        <!-- Workflow & Tools -->
+        <!-- Workflow & AI -->
         <div class="skill-category-card">
           <h3 class="skill-cat-title">
-            <i data-lucide="pen-tool" style="width:16px;height:16px;"></i>
-            Workflow & Tools
+            <i data-lucide="git-branch" style="width:18px;height:18px;"></i>
+            Workflow & AI Development
           </h3>
+          <p class="skill-cat-desc">Modern developer tooling and AI-accelerated programming.</p>
           <div class="skill-items">
-            <span class="skill-pill">Git</span>
-            <span class="skill-pill">GitHub</span>
-            <span class="skill-pill">VS Code</span>
-            <span class="skill-pill">AI-Assisted Development (Prompt Engineering)</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> Git</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> GitHub</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> VS Code</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> AI-Assisted Development</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> Prompt Engineering</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> Code Refactoring & Debugging</span>
           </div>
         </div>
 
-        <!-- Design & Languages -->
+        <!-- Tools & Software -->
         <div class="skill-category-card">
           <h3 class="skill-cat-title">
-            <i data-lucide="pen-tool" style="width:16px;height:16px;"></i>
-            Design & Languages
+            <i data-lucide="wrench" style="width:18px;height:18px;"></i>
+            Tools & Software
           </h3>
+          <p class="skill-cat-desc">Productivity applications and multimedia design software.</p>
           <div class="skill-items">
-            <span class="skill-pill">Canva</span>
-            <span class="skill-pill">CapCut</span>
-            <span class="skill-pill">Microsoft Office</span>
-            <span class="skill-pill">Indonesian (Native)</span>
-            <span class="skill-pill">English (Intermediate)</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> Canva</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> CapCut</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> Microsoft Office</span>
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="skill-category-card">
+          <h3 class="skill-cat-title">
+            <i data-lucide="languages" style="width:18px;height:18px;"></i>
+            Languages
+          </h3>
+          <p class="skill-cat-desc">Communication proficiency and language capability.</p>
+          <div class="skill-items">
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> Indonesian (Native)</span>
+            <span class="skill-pill"><i data-lucide="check" style="width:12px;height:12px;"></i> English (Intermediate)</span>
           </div>
         </div>
       </div>
@@ -235,31 +287,33 @@
     <section class="section" id="terminal">
       <div class="section-header">
         <div>
-          <div class="section-tag">04. Interactive Playground</div>
+          <div class="section-tag">05. Interactive Playground</div>
           <h2 class="section-title">Developer Terminal</h2>
-          <p class="section-desc">Type commands like <code style="font-family:var(--font-mono); font-size:0.85em; background:var(--badge-bg); padding:2px 6px; border-radius:4px;">help</code>, <code style="font-family:var(--font-mono); font-size:0.85em; background:var(--badge-bg); padding:2px 6px; border-radius:4px;">skills</code>, or <code style="font-family:var(--font-mono); font-size:0.85em; background:var(--badge-bg); padding:2px 6px; border-radius:4px;">contact</code> to interact.</p>
+          <p class="section-desc">Type interactive commands such as <code class="code-badge">help</code>, <code class="code-badge">projects</code>, <code class="code-badge">cert</code>, or <code class="code-badge">contact</code>.</p>
         </div>
       </div>
 
       <div class="terminal-wrapper">
         <div class="terminal-header">
           <div class="terminal-dots">
-            <div class="terminal-dot" style="background:#ff5f56;"></div>
-            <div class="terminal-dot" style="background:#ffbd2e;"></div>
-            <div class="terminal-dot" style="background:#27c93f;"></div>
+            <div class="terminal-dot dot-red" title="Close"></div>
+            <div class="terminal-dot dot-yellow" title="Minimize"></div>
+            <div class="terminal-dot dot-green" title="Maximize"></div>
           </div>
-          <div class="terminal-title">guest@portfolio:~ (bash)</div>
-          <div style="width:40px;"></div>
+          <div class="terminal-title">guest@nuraditya:~/portfolio (bash)</div>
+          <div class="terminal-actions">
+            <button class="terminal-btn" id="term-clear-btn" title="Clear terminal screen">Clear</button>
+          </div>
         </div>
-        <div class="terminal-body">
+        <div class="terminal-body" id="term-body">
           <div class="terminal-output" id="term-output">
-            <div class="terminal-line">Welcome to the interactive portfolio terminal v2.0.</div>
-            <div class="terminal-line">Type <span style="color:var(--text-primary); font-weight:bold;">help</span> to inspect available commands, or explore the sections above.</div>
+            <div class="terminal-line"><span style="color:var(--status-available);">●</span> Welcome to Nur Aditya's Interactive Developer Terminal.</div>
+            <div class="terminal-line">Type <span style="color:var(--text-primary); font-weight:bold;">help</span> to inspect available commands, or <span style="color:var(--text-primary); font-weight:bold;">projects</span> to view live works.</div>
           </div>
           <div class="terminal-prompt">
-            <span class="cwd">guest@portfolio:~$</span>
+            <span class="cwd">guest@nuraditya:~$</span>
             <span class="arrow">&gt;</span>
-            <input type="text" id="term-input" class="terminal-input" placeholder="type a command..." autocomplete="off" spellcheck="false">
+            <input type="text" id="term-input" class="terminal-input" placeholder="Type a command (e.g. help, projects, cert)..." autocomplete="off" spellcheck="false">
           </div>
         </div>
       </div>
@@ -269,9 +323,9 @@
     <section class="section" id="contact">
       <div class="section-header">
         <div>
-          <div class="section-tag">05. Communication</div>
+          <div class="section-tag">06. Communication</div>
           <h2 class="section-title">Get In Touch</h2>
-          <p class="section-desc">Have an opportunity, project idea, or just want to discuss engineering? Feel free to write.</p>
+          <p class="section-desc">Interested in discussing web development projects, internship opportunities, or collaborations? Feel free to reach out.</p>
         </div>
       </div>
 
@@ -279,27 +333,56 @@
         <!-- Contact Information -->
         <div class="contact-info">
           <div class="contact-card-sub">
-            <div style="font-size:0.95rem; font-weight:700;">Direct Contact</div>
-            <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5;">
-              I typically reply within 24 hours. The fastest way to reach me is directly via email or LinkedIn.
+            <div style="font-size:1.05rem; font-weight:700;">Direct Contact Channels</div>
+            <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6;">
+              I am open to web development opportunities, internships, and project collaborations. I typically respond promptly.
             </p>
 
-            <div class="copy-email-box">
-              <span id="display-email">nuradityasptra10@gmail.com</span>
-              <button class="btn btn-sm btn-secondary" id="copy-email-btn" title="Copy to clipboard">
-                <i data-lucide="copy" style="width:14px;height:14px;"></i>
-                <span>Copy</span>
-              </button>
+            <div class="contact-items-list">
+              <!-- Email -->
+              <div class="contact-detail-row">
+                <div class="contact-detail-icon"><i data-lucide="mail" style="width:16px;height:16px;"></i></div>
+                <div class="contact-detail-text">
+                  <span class="contact-label">Email Address</span>
+                  <span class="contact-val" id="display-email">nuradityasptra10@gmail.com</span>
+                </div>
+                <button class="btn btn-sm btn-secondary copy-btn" onclick="copyEmailToClipboard()" title="Copy email">
+                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
+                  <span>Copy</span>
+                </button>
+              </div>
+
+              <!-- Phone -->
+              <div class="contact-detail-row">
+                <div class="contact-detail-icon"><i data-lucide="phone" style="width:16px;height:16px;"></i></div>
+                <div class="contact-detail-text">
+                  <span class="contact-label">Phone / WhatsApp</span>
+                  <a href="https://wa.me/6281225692403" target="_blank" rel="noopener" class="contact-val link-hover">0812-2569-2403</a>
+                </div>
+                <button class="btn btn-sm btn-secondary copy-btn" onclick="copyPhoneToClipboard()" title="Copy phone">
+                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
+                  <span>Copy</span>
+                </button>
+              </div>
+
+              <!-- Location -->
+              <div class="contact-detail-row">
+                <div class="contact-detail-icon"><i data-lucide="map-pin" style="width:16px;height:16px;"></i></div>
+                <div class="contact-detail-text">
+                  <span class="contact-label">Location</span>
+                  <span class="contact-val">Surabaya, Jawa Timur, Indonesia</span>
+                </div>
+              </div>
             </div>
 
-            <div style="margin-top:0.5rem;">
-              <div style="font-size:0.8rem; font-weight:600; color:var(--text-muted); margin-bottom:0.75rem; text-transform:uppercase; letter-spacing:0.05em;">Social Channels</div>
+            <div style="margin-top:0.75rem;">
+              <div style="font-size:0.8rem; font-weight:600; color:var(--text-muted); margin-bottom:0.75rem; text-transform:uppercase; letter-spacing:0.05em;">Online Profiles</div>
               <div class="social-links">
                 <a href="https://github.com/NurAditya-dev" target="_blank" rel="noopener" class="social-pill">
-                  <svg viewBox="0 0 124 26" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.48 2 2 6.48 2 12.02c0 4.42 2.87 8.17 6.84 9.5.5.08.68-.22.68-.48v-2.16c-3.34.73-4.04-1.53-4.04-1.53-.54-1.39-1.34-1.76-1.34-1.76-.9-.62.07-.61.07-.61 1.04.07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.92.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.09-2.65 0 0 .84-.27 2.75 1.02a9.57 9.57 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.54 1.38.19 2.4.09 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.57.69.48A10 10 0 0 0 22 12.02C22 6.48 17.52 2 12 2z" fill="#181717"/>
-                    <text x="96" y="19" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#181717" font-weight="bold" text-anchor="middle">GitHub</text>
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" style="flex-shrink:0;">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
                   </svg>
+                  <span>github.com/NurAditya-dev</span>
                 </a>
               </div>
             </div>
@@ -308,6 +391,9 @@
 
         <!-- Contact Form -->
         <form class="contact-form" id="portfolio-contact-form">
+          <div style="font-size:1.05rem; font-weight:700; margin-bottom:0.25rem;">Send a Message</div>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:0.5rem;">Fill out the form below to initiate a discussion.</p>
+
           <div class="form-group">
             <label class="form-label" for="contact-name">Your Name</label>
             <input type="text" id="contact-name" class="form-input" placeholder="e.g. Alex Pratama" required>
@@ -320,7 +406,7 @@
 
           <div class="form-group">
             <label class="form-label" for="contact-message">Message</label>
-            <textarea id="contact-message" class="form-textarea" placeholder="Tell me about your project, timeline, or inquiry..." required></textarea>
+            <textarea id="contact-message" class="form-textarea" placeholder="Tell me about your project, inquiry, or idea..." required></textarea>
           </div>
 
           <button type="submit" class="btn btn-primary" style="width:100%; margin-top:0.5rem;">
@@ -338,11 +424,12 @@
        ================================================================= -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div>
-        <span>Designed with minimalism & precision. &copy; <span id="footer-year">2026</span> Nur Aditya Saputra.</span>
+      <div class="footer-left">
+        <span>Designed with precision & minimalism. &copy; <span id="footer-year">2026</span> Nur Aditya Saputra.</span>
+        <span class="footer-sub">D4 Informatics Management, Universitas Negeri Surabaya (UNESA)</span>
       </div>
 
-      <button class="footer-back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+      <button class="footer-back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Back to top">
         <i data-lucide="arrow-up" style="width:14px;height:14px;"></i>
         <span>Back to Top</span>
       </button>
@@ -353,24 +440,24 @@
        COMMAND PALETTE DIALOG (CTRL + K)
        ================================================================= -->
   <div class="modal-overlay" id="cmd-modal">
-    <div class="cmd-dialog" role="dialog" aria-modal="true" aria-labelledby="cmd-search-input">
+    <div class="cmd-dialog" role="dialog" aria-modal="true" aria-labelledby="cmd-input">
       <div class="cmd-input-box">
         <i data-lucide="search" style="width:18px;height:18px;color:var(--text-muted);"></i>
-        <input type="text" id="cmd-input" placeholder="Type a command or search section..." autocomplete="off">
+        <input type="text" id="cmd-input" placeholder="Type a command or jump to section..." autocomplete="off">
         <span class="kbd">ESC</span>
       </div>
       <ul class="cmd-list" id="cmd-list">
         <!-- Rendered via js/main.js -->
       </ul>
       <div class="cmd-footer">
-        <span>Navigation: <kbd class="kbd">↑</kbd> <kbd class="kbd">↓</kbd> to select</span>
-        <span>Press <kbd class="kbd">ENTER</kbd> to run</span>
+        <span>Navigation: <kbd class="kbd">↑</kbd> <kbd class="kbd">↓</kbd> to navigate</span>
+        <span>Press <kbd class="kbd">ENTER</kbd> to select</span>
       </div>
     </div>
   </div>
 
   <!-- =================================================================
-       PROJECT DETAIL MODAL
+       PROJECT DETAIL & PREVIEW MODAL
        ================================================================= -->
   <div class="modal-overlay" id="project-modal">
     <div class="project-modal-dialog" role="dialog" aria-modal="true">
@@ -383,14 +470,11 @@
 
       <div class="modal-body">
         <div class="modal-banner" id="modal-project-preview">
-          <div style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-muted); display:flex; align-items:center; gap:0.5rem;">
-            <i data-lucide="image" style="width:18px;height:18px;"></i>
-            <span>Project Preview / Architecture Visual</span>
-          </div>
+          <!-- Image or preview inserted via JS -->
         </div>
 
         <div>
-          <h4 style="font-size:0.9rem; font-weight:700; margin-bottom:0.4rem;">Overview</h4>
+          <h4 style="font-size:0.9rem; font-weight:700; margin-bottom:0.4rem;">Project Overview</h4>
           <p class="modal-desc" id="modal-project-desc">Description text...</p>
         </div>
 
@@ -402,32 +486,142 @@
         </div>
 
         <div>
-          <h4 style="font-size:0.9rem; font-weight:700; margin-bottom:0.4rem;">Tech Stack</h4>
+          <h4 style="font-size:0.9rem; font-weight:700; margin-bottom:0.4rem;">Technologies & Tools</h4>
           <div class="project-tags" id="modal-project-tags"></div>
         </div>
       </div>
 
       <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="openProjectImageModal()" id="modal-image-full-btn">
+          <i data-lucide="zoom-in" style="width:14px;height:14px;"></i>
+          <span>View Full Screenshot</span>
+        </button>
         <a href="#" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" id="modal-code-link">
-          <i data-lucide="github" style="width:14px;height:14px;"></i>
-          <span>View Source</span>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" style="flex-shrink:0;">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+          </svg>
+          <span>View Source Code</span>
         </a>
         <a href="#" target="_blank" rel="noopener" class="btn btn-primary btn-sm" id="modal-live-link">
           <i data-lucide="external-link" style="width:14px;height:14px;"></i>
-          <span>Open Live App</span>
+          <span>Open Live Web App</span>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- Toast Container -->
-  <div class="toast-container"></div>
+  <!-- =================================================================
+       PROJECT DEMO FULL IMAGE LIGHTBOX MODAL
+       ================================================================= -->
+  <div class="modal-overlay" id="project-image-modal">
+    <div class="cert-modal-dialog" role="dialog" aria-modal="true" style="max-width:960px;">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">Crypto Market Tracking Dashboard</h3>
+          <span style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono);">Full Web Application Screenshot · React.js &amp; CoinGecko API</span>
+        </div>
+        <button class="icon-btn" id="project-image-modal-close" aria-label="Close screenshot modal">
+          <i data-lucide="x" style="width:16px;height:16px;"></i>
+        </button>
+      </div>
 
-  <!-- Scripts -->
+      <div class="modal-body cert-modal-body">
+        <div class="cert-full-image-wrapper" style="background:#0b0e14;">
+          <a href="assets/images/crypto-market-demo.png" target="_blank" rel="noopener" title="Click to open original high-resolution file in new tab">
+            <img src="assets/images/crypto-market-demo.png" alt="Crypto Market Tracking Dashboard - Full Web App Screenshot" class="cert-full-image" style="max-height:70vh; object-fit:contain;">
+          </a>
+        </div>
+        <div class="cert-details-meta">
+          <div class="cert-meta-box">
+            <strong>Project:</strong> Crypto Market Tracking Dashboard
+          </div>
+          <div class="cert-meta-box">
+            <strong>Tech Stack:</strong> React.js, CSS, CoinGecko API, Git
+          </div>
+          <div class="cert-meta-box">
+            <strong>Live URL:</strong> crypto-track-market.vercel.app
+          </div>
+          <div class="cert-meta-box">
+            <strong>Repository:</strong> github.com/NurAditya-dev/crypto-track-market
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a href="assets/images/crypto-market-demo.png" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+          <i data-lucide="zoom-in" style="width:14px;height:14px;"></i>
+          <span>Open Original Image (New Tab)</span>
+        </a>
+        <a href="https://github.com/NurAditya-dev/crypto-track-market" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" style="flex-shrink:0;">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+          </svg>
+          <span>Source Code</span>
+        </a>
+        <a href="https://crypto-track-market.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+          <i data-lucide="external-link" style="width:14px;height:14px;"></i>
+          <span>Open Live Web App</span>
+        </a>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+
+  <!-- =================================================================
+       CERTIFICATE LIGHTBOX MODAL
+       ================================================================= -->
+  <div class="modal-overlay" id="certificate-modal">
+    <div class="cert-modal-dialog" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" id="modal-cert-title">Gemini Certified University Student</h3>
+          <span style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono);">Issued by Google for Education · Valid 17/10/2026 – 17/10/2029</span>
+        </div>
+        <button class="icon-btn" id="cert-modal-close" aria-label="Close certificate modal">
+          <i data-lucide="x" style="width:16px;height:16px;"></i>
+        </button>
+      </div>
+
+      <div class="modal-body cert-modal-body">
+        <div class="cert-full-image-wrapper">
+          <a href="assets/images/gemini-certificate.jpg" target="_blank" rel="noopener" title="Click to open original high-resolution image in new tab">
+            <img src="assets/images/gemini-certificate.jpg" alt="Google for Education Gemini Certified Student - Nur Aditya Saputra" id="cert-full-img" class="cert-full-image">
+          </a>
+        </div>
+        <div class="cert-details-meta">
+          <div class="cert-meta-box">
+            <strong>Recipient:</strong> Nur Aditya Saputra
+          </div>
+          <div class="cert-meta-box">
+            <strong>Issued Date:</strong> 17 October 2026
+          </div>
+          <div class="cert-meta-box">
+            <strong>Valid Until:</strong> 17 October 2029
+          </div>
+          <div class="cert-meta-box">
+            <strong>Authority:</strong> Google for Education / Gemini University
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a href="assets/images/gemini-certificate.jpg" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+          <i data-lucide="external-link" style="width:14px;height:14px;"></i>
+          <span>Open Full Image (New Tab)</span>
+        </a>
+        <a href="assets/images/gemini-certificate.jpg" download="Gemini-Certificate-Nur-Aditya-Saputra.jpg" class="btn btn-secondary btn-sm">
+          <i data-lucide="download" style="width:14px;height:14px;"></i>
+          <span>Download</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Main JavaScript File -->
   <script src="js/main.js"></script>
-  <script>
-    // Set dynamic current year in footer
-    document.getElementById('footer-year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
