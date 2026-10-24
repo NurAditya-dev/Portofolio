@@ -1516,7 +1516,7 @@ img {
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-lg);
   width: 100%;
-  max-width: 720px;
+  max-width: 960px;
   box-shadow: var(--shadow-float);
   overflow: hidden;
   max-height: 90vh;
@@ -1548,6 +1548,82 @@ img {
   gap: 1.25rem;
 }
 
+.project-modal-body {
+  overflow-y: auto;
+}
+
+@media (min-width: 820px) {
+  .project-modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    padding: 1.5rem;
+  }
+
+  .project-modal-left {
+    position: sticky;
+    top: 0;
+  }
+
+  .project-modal-left .modal-banner {
+    min-height: 240px;
+    max-height: 440px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0b0e14;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+  }
+
+  .project-modal-left .modal-banner img {
+    max-height: 440px;
+    width: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .project-modal-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+  }
+}
+
+@media (max-width: 819px) {
+  .project-modal-dialog {
+    max-width: 720px;
+  }
+
+  .project-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .project-modal-left .modal-banner {
+    background: #0b0e14;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+  }
+
+  .project-modal-left .modal-banner img {
+    max-height: 260px;
+    width: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .project-modal-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+  }
+}
+
 .modal-banner {
   border-radius: var(--radius-md);
   border: 1px solid var(--border-subtle);
@@ -1557,7 +1633,7 @@ img {
 
 .modal-banner img {
   width: 100%;
-  max-height: 380px;
+  max-height: 440px;
   object-fit: contain;
   display: block;
 }

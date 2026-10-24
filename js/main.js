@@ -37,7 +37,7 @@ const PROJECTS_DATA = [
     title: 'UangKu — Personal Finance Tracker',
     category: 'app',
     categoryName: 'Application',
-    badgeText: '5 MB · OFFLINE APP',
+    badgeText: 'OFFLINE APP',
     shortDesc: 'Ultra-lightweight (~5 MB) offline app to track monthly student allowances and expenses for myself and campus peers.',
     fullDesc: 'A lightweight (~5 MB) personal finance app built to solve student monthly budgeting. Created to track my own living allowance and shared with campus peers to manage their daily expenses. Operates 100% offline via LocalStorage with interactive cashflow charts, category breakdowns, and balance privacy controls.',
     tags: ['JavaScript (ES6+)', 'Android APK (~5 MB)', 'PWA', 'LocalStorage', 'CSS3', 'Offline-First'],
@@ -701,7 +701,7 @@ function openProjectModal(projectId) {
   if (bannerEl) {
     bannerEl.innerHTML = `
       <div onclick="openProjectImageModal('${proj.id}')" title="Click to view full image in high resolution" style="display:block; width:100%; cursor:zoom-in;">
-        <img src="${proj.image}" alt="${proj.title}" style="width:100%; max-height:360px; object-fit:contain; display:block;">
+        <img src="${proj.image}" alt="${proj.title}" style="width:100%; max-height:420px; object-fit:contain; display:block;">
       </div>
     `;
   }
@@ -744,6 +744,18 @@ function openProjectModal(projectId) {
 
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+
+  // Explicitly reset scroll position to the top so banner image is immediately visible
+  const bodyEl = modal.querySelector('.modal-body');
+  if (bodyEl) {
+    bodyEl.scrollTop = 0;
+  }
+  requestAnimationFrame(() => {
+    if (bodyEl) {
+      bodyEl.scrollTop = 0;
+    }
+  });
+
   initLucideIcons();
 }
 
@@ -752,6 +764,10 @@ function closeProjectModal() {
   if (modal) {
     modal.classList.remove('active');
     document.body.style.overflow = '';
+    const bodyEl = modal.querySelector('.modal-body');
+    if (bodyEl) {
+      bodyEl.scrollTop = 0;
+    }
   }
 }
 
