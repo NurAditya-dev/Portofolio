@@ -17,6 +17,7 @@ const PROJECTS_DATA = [
     title: 'Crypto Market Tracking Dashboard',
     category: 'webapp',
     categoryName: 'Web App',
+    badgeText: 'LIVE APP',
     shortDesc: 'Interactive cryptocurrency market tracking web application with live prices, 24h volume, and market capitalization powered by CoinGecko API.',
     fullDesc: 'A responsive cryptocurrency market tracking dashboard built with React.js using component-based architecture. It integrates the CoinGecko API to dynamically stream live coin prices, 24-hour percentage changes, and market capitalization with auto-updating metrics. Developed with structured AI-assisted workflows (Prompt Engineering) for efficient refactoring, CSS styling, and debugging.',
     tags: ['React.js', 'CSS', 'CoinGecko API', 'Git', 'RESTful API', 'Responsive UI'],
@@ -28,6 +29,26 @@ const PROJECTS_DATA = [
       'Integrated CoinGecko API to dynamically display crypto price trends, 24h volume, and market capitalization (auto-updated).',
       'Applied structured AI-Assisted Development (Prompt Engineering) for code refactoring, CSS optimization, and debugging efficiency.',
       'Designed responsive user interface ensuring optimal accessibility across mobile and desktop devices.'
+    ]
+  },
+  {
+    id: 'catatan-keuangan',
+    number: '02',
+    title: 'UangKu — Personal Finance Tracker',
+    category: 'app',
+    categoryName: 'Application',
+    badgeText: '5 MB · OFFLINE APP',
+    shortDesc: 'Ultra-lightweight (~5 MB) offline app to track monthly student allowances and expenses for myself and campus peers.',
+    fullDesc: 'A lightweight (~5 MB) personal finance app built to solve student monthly budgeting. Created to track my own living allowance and shared with campus peers to manage their daily expenses. Operates 100% offline via LocalStorage with interactive cashflow charts, category breakdowns, and balance privacy controls.',
+    tags: ['JavaScript (ES6+)', 'Android APK (~5 MB)', 'PWA', 'LocalStorage', 'CSS3', 'Offline-First'],
+    image: 'assets/images/catatan-keuangan-demo.png',
+    github: 'https://github.com/NurAditya-dev/Catatan-Keuangan',
+    demo: null,
+    highlights: [
+      'Real-World Utility: Helps myself and university peers manage monthly allowances and stay on budget.',
+      'Ultra-Lightweight (~5 MB): Fast-loading Android APK with minimal storage footprint and zero bloat.',
+      '100% Offline-First: Stores transactions locally using LocalStorage without needing internet or mobile data.',
+      'Charts & Privacy: Interactive cashflow graphs and a balance toggle for privacy in public spaces.'
     ]
   }
 ];
@@ -103,7 +124,8 @@ const CERTIFICATIONS_DATA = [
 
 const COMMAND_ACTIONS = [
   { id: 'nav-about', label: 'Go to About / Bio (Nur Aditya Saputra)', group: 'Navigation', icon: 'user', action: () => scrollToSection('about') },
-  { id: 'nav-projects-dashboard', label: 'Crypto Market Tracking Dashboard (React.js, CoinGecko API)', group: 'Projects', icon: 'folder-git-2', action: () => scrollToSection('projects') },
+  { id: 'nav-projects-dashboard', label: 'Crypto Market Tracking Dashboard (React.js, CoinGecko API)', group: 'Projects', icon: 'folder-git-2', action: () => { scrollToSection('projects'); openProjectModal('crypto-market'); } },
+  { id: 'nav-projects-uangku', label: 'UangKu — Student Personal Finance Tracker (Offline App · ~5 MB)', group: 'Projects', icon: 'folder-git-2', action: () => { scrollToSection('projects'); openProjectModal('catatan-keuangan'); } },
   { id: 'nav-projects', label: 'Go to Featured Projects Section', group: 'Navigation', icon: 'folder-git-2', action: () => scrollToSection('projects') },
   { id: 'nav-experience', label: 'Work Experience: Basketball Event Committee', group: 'Experience', icon: 'briefcase', action: () => { scrollToSection('experience'); document.querySelector('[data-tab="experience"]')?.click(); } },
   { id: 'nav-education-unesa', label: 'Education: Universitas Negeri Surabaya (UNESA) D4', group: 'Education', icon: 'graduation-cap', action: () => { scrollToSection('experience'); document.querySelector('[data-tab="education"]')?.click(); } },
@@ -114,6 +136,7 @@ const COMMAND_ACTIONS = [
   { id: 'nav-terminal', label: 'Open Developer Terminal (Interactive CLI)', group: 'Navigation', icon: 'terminal', action: () => scrollToSection('terminal') },
   { id: 'nav-contact', label: 'Contact Information (Email, Phone, WhatsApp)', group: 'Contact', icon: 'mail', action: () => scrollToSection('contact') },
   { id: 'act-live-demo', label: 'Open Live Crypto App Demo (Vercel)', group: 'Quick Actions', icon: 'external-link', shortcut: 'D', action: () => window.open('https://crypto-track-market.vercel.app/', '_blank') },
+  { id: 'act-catatan-keuangan-repo', label: 'Open Catatan Keuangan Repository (GitHub)', group: 'Quick Actions', icon: 'github', action: () => window.open('https://github.com/NurAditya-dev/Catatan-Keuangan', '_blank') },
   { id: 'act-cert', label: 'View Full Gemini Certificate (Lightbox)', group: 'Quick Actions', icon: 'award', shortcut: 'C', action: () => openCertificateModal() },
   { id: 'act-copy-email', label: 'Copy Email Address (nuradityasptra10@gmail.com)', group: 'Quick Actions', icon: 'copy', shortcut: 'E', action: () => copyEmailToClipboard() },
   { id: 'act-copy-phone', label: 'Copy Phone / WhatsApp (0812-2569-2403)', group: 'Quick Actions', icon: 'phone', shortcut: 'P', action: () => copyPhoneToClipboard() },
@@ -308,6 +331,26 @@ function initProjectsGrid() {
 
     const tagsHtml = proj.tags.map(t => `<span class="tag-badge">${t}</span>`).join('');
 
+    const liveLinkTop = proj.demo
+      ? `<a href="${proj.demo}" target="_blank" rel="noopener" class="project-icon-link" title="Open Live Web App" onclick="event.stopPropagation()">
+          <i data-lucide="arrow-up-right" style="width:16px;height:16px;"></i>
+        </a>`
+      : `<button type="button" class="project-icon-link" title="Demo tidak tersedia" onclick="event.stopPropagation(); showToast('Demo tidak tersedia');" style="background:none; border:none; cursor:pointer; color:inherit; display:inline-flex; align-items:center; justify-content:center;">
+          <i data-lucide="arrow-up-right" style="width:16px;height:16px;"></i>
+        </button>`;
+
+    const liveBtnAction = proj.demo
+      ? `<a href="${proj.demo}" target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="flex:1;">
+          <i data-lucide="external-link" style="width:14px;height:14px;"></i>
+          <span>Live Demo</span>
+        </a>`
+      : `<button type="button" class="btn btn-primary btn-sm" style="flex:1; cursor:pointer;" onclick="event.stopPropagation(); showToast('Demo tidak tersedia');">
+          <i data-lucide="external-link" style="width:14px;height:14px;"></i>
+          <span>Live Demo</span>
+        </button>`;
+
+    const indicatorClass = proj.category === 'app' ? 'project-live-indicator badge-app' : 'project-live-indicator';
+
     card.innerHTML = `
       <div class="project-top">
         <span class="project-number">${proj.number} // ${proj.categoryName}</span>
@@ -315,15 +358,13 @@ function initProjectsGrid() {
           <a href="${proj.github}" target="_blank" rel="noopener" class="project-icon-link" title="View Source Code" onclick="event.stopPropagation()">
             ${GITHUB_SVG_ICON}
           </a>
-          <a href="${proj.demo}" target="_blank" rel="noopener" class="project-icon-link" title="Open Live Web App" onclick="event.stopPropagation()">
-            <i data-lucide="arrow-up-right" style="width:16px;height:16px;"></i>
-          </a>
+          ${liveLinkTop}
         </div>
       </div>
       
-      <div class="project-preview" onclick="openProjectImageModal()" title="Click to view full web app screenshot" style="cursor:zoom-in;">
+      <div class="project-preview" onclick="openProjectImageModal('${proj.id}')" title="Click to view full screenshot" style="cursor:zoom-in;">
         <div class="project-image-box">
-          <span class="project-live-indicator">LIVE APP</span>
+          <span class="${indicatorClass}">${proj.badgeText || (proj.demo ? 'LIVE APP' : 'APP')}</span>
           <img src="${proj.image}" alt="${proj.title}" loading="lazy">
           <div class="project-view-overlay">
             <i data-lucide="zoom-in" style="width:20px;height:20px;"></i>
@@ -345,15 +386,12 @@ function initProjectsGrid() {
       </div>
 
       <div class="project-card-actions" onclick="event.stopPropagation()">
-        <a href="${proj.demo}" target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="flex:1;">
-          <i data-lucide="external-link" style="width:14px;height:14px;"></i>
-          <span>Live Demo</span>
-        </a>
+        ${liveBtnAction}
         <a href="${proj.github}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="flex:1;">
           ${GITHUB_SVG_ICON}
           <span>Source Code</span>
         </a>
-        <button class="btn btn-secondary btn-sm" onclick="openProjectImageModal()" title="View full screenshot" style="padding:0.4rem 0.65rem;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="openProjectImageModal('${proj.id}')" title="View full screenshot" style="padding:0.4rem 0.65rem;">
           <i data-lucide="zoom-in" style="width:14px;height:14px;"></i>
           <span>Full Image</span>
         </button>
@@ -551,6 +589,15 @@ function initModals() {
     });
   }
 
+  // Button inside project detail modal to open full screenshot
+  const fullImgBtn = document.getElementById('modal-image-full-btn');
+  if (fullImgBtn) {
+    fullImgBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openProjectImageModal(currentActiveProjectId);
+    });
+  }
+
   // Global Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -561,20 +608,72 @@ function initModals() {
   });
 }
 
-function openProjectImageModal() {
+let currentActiveProjectId = 'crypto-market';
+
+function openProjectImageModal(projectId) {
+  const targetId = projectId || currentActiveProjectId || 'crypto-market';
+  const proj = PROJECTS_DATA.find(p => p.id === targetId) || PROJECTS_DATA[0];
   const modal = document.getElementById('project-image-modal');
-  if (modal) {
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    initLucideIcons();
+  if (!modal || !proj) return;
+
+  const titleEl = document.getElementById('project-image-modal-title');
+  const subtitleEl = document.getElementById('project-image-modal-subtitle');
+  const linkEl = document.getElementById('project-image-modal-link');
+  const imgEl = document.getElementById('project-image-modal-img');
+  const metaProject = document.getElementById('project-image-modal-meta-project');
+  const metaStack = document.getElementById('project-image-modal-meta-stack');
+  const metaUrl = document.getElementById('project-image-modal-meta-url');
+  const metaRepo = document.getElementById('project-image-modal-meta-repo');
+  const btnOrig = document.getElementById('project-image-modal-btn-orig');
+  const btnRepo = document.getElementById('project-image-modal-btn-repo');
+  const btnLive = document.getElementById('project-image-modal-btn-live');
+  const liveText = document.getElementById('project-image-modal-live-text');
+
+  if (titleEl) titleEl.textContent = proj.title;
+  if (subtitleEl) subtitleEl.textContent = `${proj.categoryName} Screenshot · ${proj.tags.slice(0, 3).join(', ')}`;
+  if (linkEl) linkEl.href = proj.image;
+  if (imgEl) {
+    imgEl.src = proj.image;
+    imgEl.alt = `${proj.title} Screenshot`;
   }
+  if (metaProject) metaProject.textContent = proj.title;
+  if (metaStack) metaStack.textContent = proj.tags.join(', ');
+  if (metaUrl) metaUrl.textContent = proj.demo ? proj.demo.replace(/^https?:\/\//, '').replace(/\/$/, '') : 'Demo tidak tersedia (Offline App)';
+  if (metaRepo) metaRepo.textContent = proj.github.replace(/^https?:\/\//, '');
+
+  if (btnOrig) btnOrig.href = proj.image;
+  if (btnRepo) btnRepo.href = proj.github;
+
+  if (btnLive) {
+    if (proj.demo) {
+      btnLive.href = proj.demo;
+      btnLive.target = '_blank';
+      btnLive.onclick = null;
+      if (liveText) liveText.textContent = 'Open Live Web App';
+    } else {
+      btnLive.href = 'javascript:void(0)';
+      btnLive.target = '';
+      btnLive.onclick = (e) => {
+        e.preventDefault();
+        showToast('Demo tidak tersedia');
+      };
+      if (liveText) liveText.textContent = 'Demo Tidak Tersedia';
+    }
+  }
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  initLucideIcons();
 }
 
 function closeProjectImageModal() {
   const modal = document.getElementById('project-image-modal');
   if (modal) {
     modal.classList.remove('active');
-    document.body.style.overflow = '';
+    const otherActive = document.querySelector('.modal-overlay.active:not(#project-image-modal)');
+    if (!otherActive) {
+      document.body.style.overflow = '';
+    }
   }
 }
 
@@ -584,6 +683,8 @@ window.closeProjectImageModal = closeProjectImageModal;
 function openProjectModal(projectId) {
   const proj = PROJECTS_DATA.find(p => p.id === projectId);
   if (!proj) return;
+
+  currentActiveProjectId = proj.id;
 
   const modal = document.getElementById('project-modal');
   const titleEl = document.getElementById('modal-project-title');
@@ -599,15 +700,19 @@ function openProjectModal(projectId) {
 
   if (bannerEl) {
     bannerEl.innerHTML = `
-      <a href="${proj.image}" target="_blank" rel="noopener" title="Click to view full image in high resolution" style="display:block; width:100%; cursor:zoom-in;">
+      <div onclick="openProjectImageModal('${proj.id}')" title="Click to view full image in high resolution" style="display:block; width:100%; cursor:zoom-in;">
         <img src="${proj.image}" alt="${proj.title}" style="width:100%; max-height:360px; object-fit:contain; display:block;">
-      </a>
+      </div>
     `;
   }
 
-  const imageFullLink = document.getElementById('modal-image-full-link');
-  if (imageFullLink) {
-    imageFullLink.href = proj.image;
+  const fullImgBtn = document.getElementById('modal-image-full-btn') || document.getElementById('modal-image-full-link');
+  if (fullImgBtn) {
+    fullImgBtn.onclick = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openProjectImageModal(proj.id);
+    };
   }
 
   if (tagsEl) {
@@ -618,7 +723,23 @@ function openProjectModal(projectId) {
     highlightsEl.innerHTML = proj.highlights.map(h => `<li>${h}</li>`).join('');
   }
 
-  if (liveLinkEl) liveLinkEl.href = proj.demo;
+  if (liveLinkEl) {
+    if (proj.demo) {
+      liveLinkEl.href = proj.demo;
+      liveLinkEl.target = '_blank';
+      liveLinkEl.onclick = null;
+      liveLinkEl.innerHTML = `<i data-lucide="external-link" style="width:14px;height:14px;"></i><span>Live Demo</span>`;
+    } else {
+      liveLinkEl.href = 'javascript:void(0)';
+      liveLinkEl.target = '';
+      liveLinkEl.onclick = (e) => {
+        e.preventDefault();
+        showToast('Demo tidak tersedia');
+      };
+      liveLinkEl.innerHTML = `<i data-lucide="external-link" style="width:14px;height:14px;"></i><span>Demo Tidak Tersedia</span>`;
+    }
+  }
+
   if (codeLinkEl) codeLinkEl.href = proj.github;
 
   modal.classList.add('active');
@@ -671,7 +792,7 @@ function initInteractiveTerminal() {
   const commands = {
     help: `Available interactive commands:
   - about       : Brief overview of my background & focus
-  - projects    : Details on featured web development projects
+  - projects    : Details on featured web & app projects
   - cert        : View Gemini certification & credentials
   - skills      : Core technical capabilities and stack
   - edu         : Formal education background (UNESA & SMA)
@@ -680,23 +801,31 @@ function initInteractiveTerminal() {
   - contact     : Direct contact info & auto-copy email
   - live        : Open live demo of Crypto Market Tracking Dashboard
   - repo        : Open GitHub repositories (https://github.com/NurAditya-dev?tab=repositories)
+  - uangku      : Open UangKu (Catatan Keuangan) repository
   - theme       : Toggle dark and light theme
   - time        : Display current local timestamp
   - clear       : Clear terminal window`,
     
     about: `Nur Aditya Saputra
 D4 Informatics Management student at Universitas Negeri Surabaya (UNESA).
-Specializing in React.js and dynamic RESTful API integration.
+Specializing in React.js, vanilla JavaScript, and dynamic RESTful API integration.
 Logical thinking & analytical problem solving sharpened through OSN Informatics.
 Optimizing development workflows with AI-assisted engineering (Prompt Engineering).`,
 
-    projects: `Featured Project:
-[01] Crypto Market Tracking Dashboard
+    projects: `Featured Projects:
+[01] Crypto Market Tracking Dashboard (Web App)
   - Tech Stack  : React.js, CSS, CoinGecko API, Git
   - Live Demo   : https://crypto-track-market.vercel.app/
   - Repository  : https://github.com/NurAditya-dev/crypto-track-market
   - Description : Live crypto tracker featuring real-time prices, 24h volume, and market cap auto-updates.
-Type 'live' to open the app or 'repo' to inspect the code!`,
+
+[02] UangKu — Personal Finance Tracker (Application)
+  - Tech Stack  : JavaScript (ES6+), PWA, Android APK (~5 MB), LocalStorage, CSS3
+  - Live Demo   : Demo tidak tersedia (Offline-First App / Standalone APK)
+  - Repository  : https://github.com/NurAditya-dev/Catatan-Keuangan
+  - Description : Ultra-light (~5 MB) offline student budgeting app used by myself and campus peers.
+
+Type 'live' to open the crypto demo or 'repo' to browse all GitHub repositories!`,
 
     cert: `Certification:
 [01] Gemini Certified University Student (Siswa Tersertifikasi Gemini)
@@ -756,6 +885,16 @@ Type 'live' to open the app or 'repo' to inspect the code!`,
     repositories: () => {
       window.open('https://github.com/NurAditya-dev?tab=repositories', '_blank');
       return 'Redirecting to GitHub repositories: https://github.com/NurAditya-dev?tab=repositories';
+    },
+
+    uangku: () => {
+      window.open('https://github.com/NurAditya-dev/Catatan-Keuangan', '_blank');
+      return 'Redirecting to UangKu (Catatan Keuangan) repository: https://github.com/NurAditya-dev/Catatan-Keuangan';
+    },
+
+    catatan: () => {
+      window.open('https://github.com/NurAditya-dev/Catatan-Keuangan', '_blank');
+      return 'Redirecting to Catatan Keuangan repository: https://github.com/NurAditya-dev/Catatan-Keuangan';
     },
 
     time: () => `Current local time: ${new Date().toLocaleString()}`
@@ -1031,6 +1170,8 @@ function showToast(message) {
     }
   }, 3100);
 }
+
+window.showToast = showToast;
 
 /*NAVIGATION & SCROLL SPY*/
 function scrollToSection(id) {

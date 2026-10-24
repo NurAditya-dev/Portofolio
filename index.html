@@ -143,6 +143,7 @@
         <div class="filter-tabs">
           <button class="filter-btn active" data-filter="all">All Projects</button>
           <button class="filter-btn" data-filter="webapp">Web App</button>
+          <button class="filter-btn" data-filter="app">Application</button>
         </div>
       </div>
 
@@ -488,7 +489,7 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-secondary btn-sm" onclick="openProjectImageModal()" id="modal-image-full-btn">
+        <button type="button" class="btn btn-secondary btn-sm" id="modal-image-full-btn">
           <i data-lucide="zoom-in" style="width:14px;height:14px;"></i>
           <span>View Full Screenshot</span>
         </button>
@@ -513,8 +514,8 @@
     <div class="cert-modal-dialog" role="dialog" aria-modal="true" style="max-width:960px;">
       <div class="modal-header">
         <div>
-          <h3 class="modal-title">Crypto Market Tracking Dashboard</h3>
-          <span style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono);">Full Web Application Screenshot · React.js &amp; CoinGecko API</span>
+          <h3 class="modal-title" id="project-image-modal-title">Project Screenshot</h3>
+          <span style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono);" id="project-image-modal-subtitle">Full Application Interface</span>
         </div>
         <button class="icon-btn" id="project-image-modal-close" aria-label="Close screenshot modal">
           <i data-lucide="x" style="width:16px;height:16px;"></i>
@@ -523,44 +524,42 @@
 
       <div class="modal-body cert-modal-body">
         <div class="cert-full-image-wrapper" style="background:#0b0e14;">
-          <a href="assets/images/crypto-market-demo.png" target="_blank" rel="noopener" title="Click to open original high-resolution file in new tab">
-            <img src="assets/images/crypto-market-demo.png" alt="Crypto Market Tracking Dashboard - Full Web App Screenshot" class="cert-full-image" style="max-height:70vh; object-fit:contain;">
+          <a href="#" target="_blank" rel="noopener" id="project-image-modal-link" title="Click to open original high-resolution file in new tab">
+            <img src="" alt="" id="project-image-modal-img" class="cert-full-image" style="max-height:70vh; object-fit:contain;">
           </a>
         </div>
         <div class="cert-details-meta">
           <div class="cert-meta-box">
-            <strong>Project:</strong> Crypto Market Tracking Dashboard
+            <strong>Project:</strong> <span id="project-image-modal-meta-project">Project Name</span>
           </div>
           <div class="cert-meta-box">
-            <strong>Tech Stack:</strong> React.js, CSS, CoinGecko API, Git
+            <strong>Tech Stack:</strong> <span id="project-image-modal-meta-stack">Tech Stack</span>
           </div>
           <div class="cert-meta-box">
-            <strong>Live URL:</strong> crypto-track-market.vercel.app
+            <strong>Live Demo:</strong> <span id="project-image-modal-meta-url">Live URL</span>
           </div>
           <div class="cert-meta-box">
-            <strong>Repository:</strong> github.com/NurAditya-dev/crypto-track-market
+            <strong>Repository:</strong> <span id="project-image-modal-meta-repo">Repository URL</span>
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
-        <a href="assets/images/crypto-market-demo.png" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+        <a href="#" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" id="project-image-modal-btn-orig">
           <i data-lucide="zoom-in" style="width:14px;height:14px;"></i>
           <span>Open Original Image (New Tab)</span>
         </a>
-        <a href="https://github.com/NurAditya-dev/crypto-track-market" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+        <a href="#" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" id="project-image-modal-btn-repo">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" style="flex-shrink:0;">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
           </svg>
           <span>Source Code</span>
         </a>
-        <a href="https://crypto-track-market.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+        <a href="#" target="_blank" rel="noopener" class="btn btn-primary btn-sm" id="project-image-modal-btn-live">
           <i data-lucide="external-link" style="width:14px;height:14px;"></i>
-          <span>Open Live Web App</span>
+          <span id="project-image-modal-live-text">Open Live Web App</span>
         </a>
       </div>
-    </div>
-  </div>
     </div>
   </div>
 

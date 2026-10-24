@@ -711,6 +711,10 @@ img {
   z-index: 2;
 }
 
+.project-live-indicator.badge-app {
+  background: rgba(37, 99, 235, 0.92);
+}
+
 .project-live-indicator::before {
   content: '';
   width: 6px;
@@ -1575,6 +1579,10 @@ img {
 }
 
 /* Certificate Lightbox Dialog */
+#project-image-modal {
+  z-index: 1050;
+}
+
 .cert-modal-dialog {
   background: var(--bg-card);
   border: 1px solid var(--border-medium);
