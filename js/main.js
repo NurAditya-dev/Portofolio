@@ -649,7 +649,7 @@ function openProjectImageModal(projectId) {
       btnLive.href = proj.demo;
       btnLive.target = '_blank';
       btnLive.onclick = null;
-      if (liveText) liveText.textContent = 'Open Live Web App';
+      if (liveText) liveText.textContent = 'Live Demo';
     } else {
       btnLive.href = 'javascript:void(0)';
       btnLive.target = '';
@@ -852,7 +852,7 @@ Type 'live' to open the crypto demo or 'repo' to browse all GitHub repositories!
 
     skills: `Technical Core & Arsenal:
   - Code Skills : React.js, JavaScript (ES6+), HTML5, CSS3, Responsive Web Design
-  - API & Data  : RESTful API Integration, Asynchronous JS, JSON Data Parsing, CoinGecko API
+  - API & Data  : RESTful APIs, Asynchronous JS, JSON Data Parsing, API Integration
   - Workflow    : Git, GitHub, VS Code, AI-Assisted Development (Prompt Engineering)
   - Tools       : Canva, CapCut, Microsoft Office
   - Languages   : Indonesian (Native), English (Intermediate)`,
