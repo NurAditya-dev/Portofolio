@@ -1110,21 +1110,64 @@ function initContactForm() {
   const form = document.getElementById('portfolio-contact-form');
 
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalHtml = submitBtn.innerHTML;
 
+      const name = document.getElementById('contact-name')?.value.trim() || '';
+      const email = document.getElementById('contact-email')?.value.trim() || '';
+      const message = document.getElementById('contact-message')?.value.trim() || '';
+
+      if (!name || !email || !message) {
+        showToast('Please fill in all fields.');
+        return;
+      }
+
       submitBtn.innerHTML = `<span>Sending...</span>`;
       submitBtn.disabled = true;
 
-      setTimeout(() => {
-        showToast('Message received! Thank you, I will reply shortly.');
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/nuradityasptra10@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            message: message,
+            _replyto: email,
+            _subject: `Portfolio Message from ${name}`,
+            _template: 'table',
+            _captcha: 'false'
+          })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && (result.success === 'true' || result.success === true)) {
+          showToast('Message sent successfully! Thank you, I will reply shortly.');
+          form.reset();
+        } else {
+          const subject = encodeURIComponent(`Portfolio Message from ${name}`);
+          const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+          window.location.href = `mailto:nuradityasptra10@gmail.com?subject=${subject}&body=${body}`;
+          showToast('Opening email client to send your message...');
+          form.reset();
+        }
+      } catch (err) {
+        const subject = encodeURIComponent(`Portfolio Message from ${name}`);
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+        window.location.href = `mailto:nuradityasptra10@gmail.com?subject=${subject}&body=${body}`;
+        showToast('Opening email client to send your message...');
         form.reset();
+      } finally {
         submitBtn.innerHTML = originalHtml;
         submitBtn.disabled = false;
         initLucideIcons();
-      }, 900);
+      }
     });
   }
 }
